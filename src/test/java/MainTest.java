@@ -3,11 +3,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.stream.LongStream;
-
 public class MainTest {
 
-    Main main;
+    private Main main;
 
     @Before
     public void setUp() throws Exception {
@@ -58,16 +56,14 @@ public class MainTest {
 
     @Test
     public void testFind30BigObj() throws Exception {
-        // 本機跑 35s
         main.findAllObj(30);
         Assert.assertEquals(30, main.getBestScore());
         Assert.assertEquals("111111111111111111111111111111", main.getBestObj());
     }
 
-    @Ignore
     @Test
     public void testFind40SuperBigObj() throws Exception {
-        // 預估會跑 10 小時左右
+        // 目前一次23分
         main.findAllObj(40);
         Assert.assertEquals(40, main.getBestScore());
     }
@@ -75,17 +71,9 @@ public class MainTest {
     @Ignore
     @Test
     public void testFind50SuperBigObj() throws Exception {
-        // 預估會跑 10000 小時左右
+        // 預估起來太久，不執行
         main.findAllObj(50);
         Assert.assertEquals(50, main.getBestScore());
     }
 
-    @Test
-    public void testStreamList() throws Exception {
-        long maxValue = (long) Math.pow(2, 4);
-        LongStream one = LongStream.iterate(0, x -> x + 1).limit(maxValue);
-
-        long[] longs = {0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 13L, 14L, 15L};
-        Assert.assertArrayEquals(longs, one.toArray());
-    }
 }
