@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.stream.LongStream;
+
 public class Main {
     public static void main(String[] args) {
         int testN = 5;
@@ -25,9 +28,24 @@ public class Main {
 //        LongStream one = LongStream.iterate(0, x -> x + 1).limit(maxValue);
 //        one.forEach(this::checkBestObj);
 
-        for (long i = 0; i < maxValue; i++) {
-            checkBestObj(i);
+//        LongStream one = LongStream.range(0,maxValue);
+//        one.forEach(this::checkBestObj);
+
+//        LongStream one = LongStream.range(0,maxValue);
+//        Iterator<Long> iterator = one.iterator();
+//        while (iterator.hasNext()){
+//            checkBestObj(iterator.next());
+//        }
+
+        long count = 0;
+        while (count < maxValue){
+            checkBestObj(count);
+            count ++ ;
         }
+
+//        for (long i = 0; i < maxValue; i++) {
+//            checkBestObj(i);
+//        }
 
     }
 
@@ -40,7 +58,7 @@ public class Main {
         }
     }
 
-    int computerScore(long value) {
+    int computerScore(Long value) {
         return Long.bitCount(value);
     }
 
