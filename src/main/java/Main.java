@@ -1,17 +1,22 @@
+import model.AlgorithmModel;
+import model.ModelFactory;
+
 public class Main {
     public static void main(String[] args) {
-        int testN = 5;
+        int testN = 20; // default
+        String algorithm = ModelFactory.EXHAUSTION_SEARCH;
         if (args.length > 0) {
             try {
-                testN = Integer.parseInt(args[0]);
+                algorithm = args[0];
+                testN = Integer.parseInt(args[1]);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
 
-        Main main = new Main();
-        main.findAllObj(testN);
-        System.out.println(String.format("The one-max result of 2^%d is %s, it's score is %d", testN, main.getBestObj(), main.getBestScore()));
+        AlgorithmModel model = ModelFactory.createModel(algorithm, testN);
+        model.start();
+        System.out.println(String.format("The one-max result of 2^%d is %s, it's score is %d", testN, model.getResult(), model.getScore()));
     }
 
 

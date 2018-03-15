@@ -51,4 +51,9 @@ public class ExhaustionModel implements AlgorithmModel {
         }
         return builder.toString();
     }
+
+    @Override
+    public int getScore() {
+        return bestScore;
+    }
 }

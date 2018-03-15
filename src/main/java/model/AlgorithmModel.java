@@ -15,4 +15,6 @@ public interface AlgorithmModel {
     void start();
     String getResult();
 
+    int getScore();
+
 }
