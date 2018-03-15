@@ -1,15 +1,15 @@
 package model;
 
 import evaluator.EvaluateFunction;
+import transition.LongTransition;
 
-import java.util.Iterator;
-
-public interface AlgorithmModel<T> {
+public interface AlgorithmModel {
 
     void init();
 
-    void setTransit(Iterator<T> transit);
-    void setEvaluator(EvaluateFunction<T> evaluator);
+    void setTransit(LongTransition transit);
+
+    void setEvaluator(EvaluateFunction evaluator);
 
 
     void start();

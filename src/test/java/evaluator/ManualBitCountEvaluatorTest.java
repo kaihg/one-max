@@ -25,4 +25,44 @@ public class ManualBitCountEvaluatorTest {
         Assert.assertEquals(1, evaluator.evaluate(0b100L));
 
     }
+
+    @Test
+    public void testRunTime_Long() {
+        long count = 0;
+        long end = (long) Math.pow(2, 25);
+        while (count < end) {
+            evaluator.evaluate(count++);
+        }
+    }
+
+    @Test
+    public void testRunTime_Long2() {
+        Long count = 0L;
+        long end = (long) Math.pow(2, 25);
+        while (count < end) {
+            evaluator.evaluate(count++);
+        }
+    }
+
+
+    @Test
+    public void testRunTime_long() {
+        long count = 0;
+        long end = (long) Math.pow(2, 25);
+        while (count < end) {
+            evaluate(count++);
+        }
+    }
+
+    public int evaluate(long value) {
+        int count = 0;
+
+        while (value > 0) {
+            count += value & 0b1;
+            value = value >> 1;
+        }
+
+        return count;
+
+    }
 }

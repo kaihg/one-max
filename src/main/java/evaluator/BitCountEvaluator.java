@@ -6,4 +6,6 @@ class BitCountEvaluator implements EvaluateFunction<Long> {
     public int evaluate(Long item) {
         return Long.bitCount(item);
     }
+
+
 }

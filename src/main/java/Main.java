@@ -1,6 +1,3 @@
-import java.util.Iterator;
-import java.util.stream.LongStream;
-
 public class Main {
     public static void main(String[] args) {
         int testN = 5;
@@ -58,8 +55,16 @@ public class Main {
         }
     }
 
-    int computerScore(Long value) {
+    int computerScore(long value) {
         return Long.bitCount(value);
+//        int count = 0;
+//
+//        while (value > 0) {
+//            count += value & 0b1;
+//            value = value >> 1;
+//        }
+//
+//        return count;
     }
 
     public long getBestScore() {

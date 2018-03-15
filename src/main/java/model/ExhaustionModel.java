@@ -1,17 +1,16 @@
 package model;
 
 import evaluator.EvaluateFunction;
+import transition.LongTransition;
 
-import java.util.Iterator;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
+import java.util.Arrays;
 
-public class ExhaustionModel implements AlgorithmModel<Long>{
+public class ExhaustionModel implements AlgorithmModel {
 
-    private Iterator<Long> transit;
-    private EvaluateFunction<Long> evalutor;
+    private LongTransition transit;
+    private EvaluateFunction<int[]> evalutor;
 
-    private Long bestObj;
+    private int[] bestObj = {};
     private int bestScore;
 
     @Override
@@ -20,26 +19,24 @@ public class ExhaustionModel implements AlgorithmModel<Long>{
     }
 
     @Override
-    public void setTransit(Iterator<Long> transit) {
+    public void setTransit(LongTransition transit) {
         this.transit = transit;
     }
 
     @Override
-    public void setEvaluator(EvaluateFunction<Long> evaluator) {
+    public void setEvaluator(EvaluateFunction evaluator) {
         this.evalutor = evaluator;
     }
 
     @Override
     public void start() {
         init();
-//        LongStream test = LongStream.range(0,1);
-
 
         while(transit.hasNext()){
-            Long nextObj = transit.next();
+            int[] nextObj = transit.next();
             int score = evalutor.evaluate(nextObj);
             if (score > this.bestScore){
-                this.bestObj = nextObj;
+                this.bestObj = Arrays.copyOf(nextObj, nextObj.length);
                 this.bestScore = score;
             }
         }
@@ -47,6 +44,11 @@ public class ExhaustionModel implements AlgorithmModel<Long>{
 
     @Override
     public String getResult() {
-        return Long.toBinaryString(this.bestObj);
+//        return Long.toBinaryString(this.bestObj);
+        StringBuilder builder = new StringBuilder();
+        for (int i = bestObj.length - 1; i >= 0; i--) {
+            builder.append(bestObj[i]);
+        }
+        return builder.toString();
     }
 }

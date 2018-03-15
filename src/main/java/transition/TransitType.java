@@ -1,4 +1,4 @@
-package transit;
+package transition;
 
 public enum TransitType {
 

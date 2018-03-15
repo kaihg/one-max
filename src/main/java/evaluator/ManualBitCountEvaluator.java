@@ -4,6 +4,10 @@ class ManualBitCountEvaluator implements EvaluateFunction<Long> {
 
     @Override
     public int evaluate(Long value) {
+        return evaluate(value.longValue());
+    }
+
+    private int evaluate(long value) {
         int count = 0;
 
         while (value > 0) {
@@ -12,6 +16,5 @@ class ManualBitCountEvaluator implements EvaluateFunction<Long> {
         }
 
         return count;
-
     }
 }
