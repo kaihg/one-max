@@ -1,0 +1,58 @@
+package model;
+
+import evaluator.EvaluateFunction;
+import transition.LongTransition;
+
+public class RepeatModel implements AlgorithmModel {
+
+    private AlgorithmModel model;
+    private int repeatTimes;
+    private String result = "";
+    private int bestScore;
+
+    public RepeatModel(AlgorithmModel model, int repeat) {
+        this.model = model;
+        this.repeatTimes = repeat;
+    }
+
+    @Override
+    public void init() {
+        this.model.init();
+    }
+
+    @Override
+    public void setTransit(LongTransition transit) {
+        this.model.setTransit(transit);
+    }
+
+    @Override
+    public void setEvaluator(EvaluateFunction evaluator) {
+        this.model.setEvaluator(evaluator);
+    }
+
+    @Override
+    public void start() {
+        int score = 0;
+        String result = "";
+        for (int i = 0; i < repeatTimes; i++) {
+            this.model.start();
+            if (model.getScore() > score) {
+                score = model.getScore();
+                result = model.getResult();
+            }
+        }
+
+        this.bestScore = score;
+        this.result = result;
+    }
+
+    @Override
+    public String getResult() {
+        return result;
+    }
+
+    @Override
+    public int getScore() {
+        return bestScore;
+    }
+}

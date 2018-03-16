@@ -13,7 +13,7 @@ public class ModelFactory {
     public static final String EXHAUSTION_SEARCH = "es";
     public static final String HILL_CLIMBING = "hc";
 
-    public static AlgorithmModel createModel(String algorithm, int bitCount) {
+    public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int inter) {
         AlgorithmModel model;
         LongTransition transition;
         EvaluateFunction function;
@@ -25,7 +25,7 @@ public class ModelFactory {
                 function = EvaluatorFactory.createLongEvaluator();
                 break;
             case HILL_CLIMBING:
-                model = new HillClimbingModel(bitCount,1<<(bitCount/2));
+                model = new RepeatModel(new HillClimbingModel(bitCount, inter), runTimes);
                 transition = TransitFactory.createLongIterator(TransitType.RANDOM_NEIGHBOR, Optional.of("0"), bitCount);
                 function = EvaluatorFactory.createLongEvaluator();
                 break;
