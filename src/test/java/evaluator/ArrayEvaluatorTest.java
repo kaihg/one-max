@@ -12,7 +12,7 @@ public class ArrayEvaluatorTest {
     public void speedTest() {
         Random random = new Random();
 
-        EvaluateFunction<IntStream> function = new ArrayCountEvaluator();
+        EvaluateFunction<IntStream> function = new IntStreamCountEvaluator();
         IntStream stream = IntStream.generate(() -> random.nextInt() % 2).limit(25);
 
         long start = System.currentTimeMillis();

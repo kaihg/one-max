@@ -4,7 +4,7 @@ The score means how many '1' in a binary array.
 For example, the score of "10101" is 3, and "11111" get 5.
 
 ## Max N
-The max N is 62 on my Mac Air. In fact, it is the binary digital of Long.MAX_VALUE.
+The limit of max N is on the basis of memory.
 
 However, the cost time is very large on Exhaustion model.
 
