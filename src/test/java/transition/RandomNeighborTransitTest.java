@@ -73,4 +73,25 @@ public class RandomNeighborTransitTest {
             Assert.assertArrayEquals(startArray, iterator.next());
         }
     }
+
+    @Test
+    public void when_next_then_getOneBitChange() throws Exception {
+        LongTransition transition = new RandomNeighborTransition(0,1);
+        Assert.assertArrayEquals(new int[]{0},transition.next());
+        Assert.assertArrayEquals(new int[]{1},transition.next());
+        Assert.assertArrayEquals(new int[]{0},transition.next());
+    }
+
+    @Test
+    public void when_setDefault_then_getTheValue() throws Exception {
+        LongTransition transition = new RandomNeighborTransition(0,5);
+
+        Assert.assertArrayEquals(new int[]{0,0,0,0,0},transition.next());
+
+        transition.setDefaultValue("11001");
+        Assert.assertArrayEquals(new int[]{1,0,0,1,1},transition.next());
+
+        transition.setDefaultValue("11111");
+        Assert.assertArrayEquals(new int[]{1,1,1,1,1},transition.next());
+    }
 }
