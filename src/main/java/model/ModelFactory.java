@@ -12,6 +12,7 @@ public class ModelFactory {
 
     public static final String EXHAUSTION_SEARCH = "es";
     public static final String HILL_CLIMBING = "hc";
+    public static final String SIMULATED_ANNEALING = "sa";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int inter) {
         AlgorithmModel model;
@@ -19,13 +20,18 @@ public class ModelFactory {
         EvaluateFunction function;
         switch (algorithm) {
             case EXHAUSTION_SEARCH:
-            default:
                 model = new ExhaustionModel();
                 transition = TransitFactory.createLongIterator(TransitType.INCREASE, Optional.of("0"), bitCount);
                 function = EvaluatorFactory.createLongEvaluator();
                 break;
             case HILL_CLIMBING:
+            default:
                 model = new RepeatModel(new HillClimbingModel(bitCount, inter), runTimes);
+                transition = TransitFactory.createLongIterator(TransitType.RANDOM_NEIGHBOR, Optional.of("0"), bitCount);
+                function = EvaluatorFactory.createLongEvaluator();
+                break;
+            case SIMULATED_ANNEALING:
+                model = new SimulatedAnnealingModel(bitCount, inter);
                 transition = TransitFactory.createLongIterator(TransitType.RANDOM_NEIGHBOR, Optional.of("0"), bitCount);
                 function = EvaluatorFactory.createLongEvaluator();
                 break;
