@@ -94,4 +94,28 @@ public class RandomNeighborTransitTest {
         transition.setDefaultValue("11111");
         Assert.assertArrayEquals(new int[]{1,1,1,1,1},transition.next());
     }
+
+    @Test
+    public void only1DistanceBetween2Neighbors() {
+        int length = 10;
+        LongTransition transition = new RandomNeighborTransition(4, length);
+
+        int[] neighbor = new int[length];
+        for (int i = 0; i < 50; i++) {
+            int[] current = transition.next();
+
+            for (int j = 0; j < 10; j++) {
+                transition.neighbor(current, neighbor);
+
+                int hammingDist = 0;
+                for (int k = 0; k < length; k++) {
+                    if (current[k] != neighbor[k]) {
+                        hammingDist++;
+                    }
+                }
+                Assert.assertEquals(1, hammingDist);
+            }
+        }
+
+    }
 }

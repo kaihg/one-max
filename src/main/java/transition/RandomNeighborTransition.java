@@ -38,7 +38,7 @@ class RandomNeighborTransition implements LongTransition {
     public void neighbor(int[] current, int[] empty) {
         int bit = random.nextInt(bitNumber);
         for (int i = 0; i < current.length; i++) {
-            empty[i] = i==bit ? currentAry[i]^1 : currentAry[i];
+            empty[i] = i == bit ? current[i] ^ 1 : current[i];
         }
     }
 

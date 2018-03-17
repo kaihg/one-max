@@ -8,7 +8,7 @@ public class HillClimbingModelTest {
     @Test
     public void when_bitIs8_then_ansIs11111111() throws Exception {
 
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, 8, 30, 1000);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, 8, 1, 1000);
 
         model.start();
 
@@ -19,26 +19,32 @@ public class HillClimbingModelTest {
     }
 
     @Test
-    public void when_bitIs30_then_ansIs2Of30() throws Exception {
+    public void when_bitIs30_then_ansIs2of30() throws Exception {
         int bit = 30;
         simpleTestResult(bit);
     }
 
     @Test
-    public void when_bitIs40_then_ansIs2Of40() throws Exception {
+    public void when_bitIs40_then_ansIs2of40() throws Exception {
         int bit = 40;
         simpleTestResult(bit);
     }
 
     @Test
-    public void when_bitIs50_then_ansIs2Of50() throws Exception {
+    public void when_bitIs50_then_ansIs2of50() throws Exception {
         simpleTestResult(50);
     }
 
     @Test
-    public void when_bitIs100_then_ansIs2Of100() throws Exception {
+    public void when_bitIs100_then_ansIs2of100() throws Exception {
         int bit = 100;
-        simpleTestResult(100);
+        simpleTestResult(bit);
+    }
+
+    @Test
+    public void when_bitIs1000_then_ansIs2of1000() throws Exception {
+        int bit = 1000;
+        simpleTestResult(bit);
     }
 
     private void simpleTestResult(int bit) {
