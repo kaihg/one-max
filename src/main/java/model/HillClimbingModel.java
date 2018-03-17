@@ -50,17 +50,30 @@ public class HillClimbingModel implements AlgorithmModel{
         int[] tempAry = new int[bitCount];
 
         int score = evaluateFunction.evaluate(current);
+        int maxScore = bitCount;
 
         for (int i = 0; i < iterationTimes; i++) {
-            transition.neighbor(current,tempAry);
-            int score2 = evaluateFunction.evaluate(tempAry);
-            if (score2 > score){
-                bestObj = Arrays.copyOf(tempAry,tempAry.length);
-                score = score2;
-                int[] swap = current;
-                current = tempAry;
-                tempAry = swap;
+            int maxTry = bitCount;
+            int count = 0;
 
+            // find better neighbor with "bitCount" times at most
+            do {
+                transition.neighbor(current, tempAry);
+
+                int score2 = evaluateFunction.evaluate(tempAry);
+                if (score2 > score) {
+                    bestObj = Arrays.copyOf(tempAry, tempAry.length);
+                    score = score2;
+                    int[] swap = current;
+                    current = tempAry;
+                    tempAry = swap;
+
+                    break;
+                }
+                count++;
+            } while (count < maxTry);
+            if (score == maxScore) {
+                break;
             }
         }
     }
