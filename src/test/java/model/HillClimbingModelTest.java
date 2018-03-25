@@ -8,7 +8,7 @@ public class HillClimbingModelTest {
     @Test
     public void when_bitIs8_then_ansIs11111111() throws Exception {
 
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, 8, 1, 1000);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, 8, 1, 1000, 1);
 
         model.start();
 
@@ -48,7 +48,7 @@ public class HillClimbingModelTest {
     }
 
     private void simpleTestResult(int bit) {
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bit, 30, 1000);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bit, 30, 1000, 1);
         model.start();
         Assert.assertEquals(bit, model.getScore());
 

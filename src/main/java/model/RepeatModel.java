@@ -36,14 +36,16 @@ public class RepeatModel implements AlgorithmModel {
         String result = "";
         for (int i = 0; i < repeatTimes; i++) {
             this.model.start();
-            if (model.getScore() > score) {
-                score = model.getScore();
-                result = model.getResult();
-            }
+            score += model.getScore();
         }
 
-        this.bestScore = score;
+        this.bestScore = score / repeatTimes;
         this.result = result;
+    }
+
+    @Override
+    public void iterateOnce(int[] current) {
+
     }
 
     @Override

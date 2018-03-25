@@ -58,4 +58,13 @@ public class ArrayEvaluatorTest {
         Assert.assertTrue(time / times < 2);
         System.out.println(time);
     }
+
+    @Test
+    public void testMaxScore() {
+        EvaluateFunction<int[]> function = new IntArrayCountEvaluator();
+
+        int bit = 7;
+        int[] testAry = new int[bit];
+        Assert.assertEquals(bit, function.maxScore(testAry));
+    }
 }

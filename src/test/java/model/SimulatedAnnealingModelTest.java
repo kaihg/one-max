@@ -7,7 +7,7 @@ public class SimulatedAnnealingModelTest {
 
     @Test
     public void when_bitIs8_then_resultIs11111111() {
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, 8, 1, 1000);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, 8, 1, 1000, 1);
 
         model.start();
 
@@ -17,7 +17,7 @@ public class SimulatedAnnealingModelTest {
 
     @Test
     public void when_bitIs20_then_resultIs2of20() {
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, 20, 1, 1000);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, 20, 1, 1000, 1);
 
         model.start();
 
@@ -38,7 +38,7 @@ public class SimulatedAnnealingModelTest {
     }
 
     private void simpleTestResult(int bit) {
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, bit, 1, 1000);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, bit, 1, 1000, 1);
         model.start();
         Assert.assertEquals(bit, model.getScore());
 

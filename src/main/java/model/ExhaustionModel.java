@@ -43,6 +43,11 @@ public class ExhaustionModel implements AlgorithmModel {
     }
 
     @Override
+    public void iterateOnce(int[] current) {
+
+    }
+
+    @Override
     public String getResult() {
 //        return Long.toBinaryString(this.bestObj);
         StringBuilder builder = new StringBuilder();

@@ -11,10 +11,11 @@ public interface AlgorithmModel {
 
     void setEvaluator(EvaluateFunction evaluator);
 
-
     void start();
-    String getResult();
 
+    void iterateOnce(int[] current);
+
+    String getResult();
     int getScore();
 
 }

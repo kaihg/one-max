@@ -3,7 +3,6 @@ package model;
 import evaluator.EvaluateFunction;
 import transition.LongTransition;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -13,15 +12,23 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
     private EvaluateFunction<int[]> evaluateFunction;
 
     private int bitCount;
+    private int score;
     private double temperature = 1;
     private double deltaScale;
     private int[] bestObj;
+    private int maxIteration;
 
     private Random random = new Random();
+    private int[] tempAry;
 
-    SimulatedAnnealingModel(int bitCount, int startTemperature) {
+
+    SimulatedAnnealingModel(int bitCount, int iteration, int startTemperature) {
         this.bitCount = bitCount;
+        maxIteration = iteration;
         this.deltaScale = 1d - 1d / startTemperature;
+
+        bestObj = new int[bitCount];
+        tempAry = new int[bitCount];
     }
 
     @Override
@@ -50,30 +57,33 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
         init();
 
         int[] current = transition.next();
-        int[] tempAry = new int[bitCount];
+//        int[] tempAry = new int[bitCount];
 
-        int score = evaluateFunction.evaluate(current);
+        score = evaluateFunction.evaluate(current);
         int maxScore = bitCount;
 
-        double minTemper = 0.0001;
+//        double minTemper = 0.0001;
         int count = 0;
 
-        while (temperature > minTemper && score < maxScore) {
-            transition.neighbor(current, tempAry);
-            int score2 = evaluateFunction.evaluate(tempAry);
-
-            if (determination(score, score2)) {
-                bestObj = Arrays.copyOf(tempAry, tempAry.length);
-                score = score2;
-                int[] swap = current;
-                current = tempAry;
-                tempAry = swap;
-            }
-
-            temperature *= deltaScale;
-
+        while (count < maxIteration && score < maxScore) {
+            iterateOnce(current);
+            count++;
         }
 
+    }
+
+    @Override
+    public void iterateOnce(int[] current) {
+        transition.neighbor(current, tempAry);
+        int score2 = evaluateFunction.evaluate(tempAry);
+
+        if (determination(score, score2)) {
+            System.arraycopy(tempAry, 0, bestObj, 0, bitCount);
+            System.arraycopy(tempAry, 0, current, 0, bitCount);
+            score = score2;
+        }
+
+        temperature *= deltaScale;
     }
 
     private boolean determination(int current, int neighbor) {

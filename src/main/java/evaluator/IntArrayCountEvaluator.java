@@ -1,6 +1,7 @@
 package evaluator;
 
 public class IntArrayCountEvaluator implements EvaluateFunction<int[]> {
+
     @Override
     public int evaluate(int[] item) {
         int count = 0;
@@ -9,4 +10,10 @@ public class IntArrayCountEvaluator implements EvaluateFunction<int[]> {
         }
         return count;
     }
+
+    @Override
+    public int maxScore(int[] item) {
+        return item.length;
+    }
+
 }

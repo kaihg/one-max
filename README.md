@@ -24,7 +24,7 @@ The probability is base on T, temperature. The temperature will decrease every i
 However, the annealing speed is the essential. The result will not be good while speed is too fast. But take too mach time on low speed.
 
 In the implement, I set the scale is (iteration - 1)/iteration. And the probability is e^((s1 - s2)/T).
-T = T * scale after one iteration finished. The model will stop if T < 0.0001. 
+T = T * scale after one iteration finished. The model will stop if T < 0.0001.
 
 ## Versions
 ### ExhaustionSearch (2018/3/16)

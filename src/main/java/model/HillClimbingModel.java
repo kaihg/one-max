@@ -3,7 +3,6 @@ package model;
 import evaluator.EvaluateFunction;
 import transition.LongTransition;
 
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -16,9 +15,16 @@ public class HillClimbingModel implements AlgorithmModel{
     private int iterationTimes;
     private int[] bestObj;
 
+    //    private int[] current;
+    private int[] tempAry;
+    private int score;
+
     public HillClimbingModel(int bitCount, int iterationTimes) {
         this.bitCount = bitCount;
         this.iterationTimes = iterationTimes;
+
+        bestObj = new int[bitCount];
+        tempAry = new int[bitCount];
     }
 
     @Override
@@ -47,35 +53,31 @@ public class HillClimbingModel implements AlgorithmModel{
         init();
 
         int[] current = transition.next();
-        int[] tempAry = new int[bitCount];
 
-        int score = evaluateFunction.evaluate(current);
+        score = evaluateFunction.evaluate(current);
         int maxScore = bitCount;
 
         for (int i = 0; i < iterationTimes; i++) {
-            int maxTry = bitCount;
-            int count = 0;
+            this.iterateOnce(current);
 
-            // find better neighbor with "bitCount" times at most
-            do {
-                transition.neighbor(current, tempAry);
-
-                int score2 = evaluateFunction.evaluate(tempAry);
-                if (score2 > score) {
-                    bestObj = Arrays.copyOf(tempAry, tempAry.length);
-                    score = score2;
-                    int[] swap = current;
-                    current = tempAry;
-                    tempAry = swap;
-
-                    break;
-                }
-                count++;
-            } while (count < maxTry);
             if (score == maxScore) {
                 break;
             }
         }
+    }
+
+    @Override
+    public void iterateOnce(int[] current) {
+        // find better neighbor with "bitCount" times at most
+        transition.neighbor(current, tempAry);
+
+        int score2 = evaluateFunction.evaluate(tempAry);
+        if (score2 > score) {
+            System.arraycopy(tempAry, 0, bestObj, 0, bitCount);
+            System.arraycopy(tempAry, 0, current, 0, bitCount);
+            score = score2;
+        }
+
     }
 
     @Override
