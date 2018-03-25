@@ -9,7 +9,7 @@ public class CompositeModel {
         int repeatTimes = 30;
         int iteration = 500;
         int bitCount = 100;
-        int neighborPick = 10;
+        int neighborPick = 1;
 
         startToTest(repeatTimes, iteration, bitCount, neighborPick);
     }
