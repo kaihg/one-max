@@ -14,7 +14,7 @@ class RandomNeighborTransition implements LongTransition {
         this.random = new Random();
         this.bitNumber = bitNumber;
         this.currentAry = new int[bitNumber];
-        LongTransition.convertLongToIntAry(bitNumber,start,currentAry);
+        LongTransition.convertLongToIntAry(bitNumber, start, currentAry);
     }
 
 
@@ -22,7 +22,7 @@ class RandomNeighborTransition implements LongTransition {
     public void setDefaultValue(String value) {
         int length = value.length();
         for (int i = 0; i < currentAry.length; i++) {
-            int bit = i>length? 0 : value.charAt(length - i -1) - '0';
+            int bit = i > length ? 0 : value.charAt(length - i - 1) - '0';
             currentAry[i] = bit;
         }
 
@@ -44,10 +44,10 @@ class RandomNeighborTransition implements LongTransition {
 
     @Override
     public int[] next() {
-        if(isFirst){
+        if (isFirst) {
             isFirst = false;
             return currentAry;
-        }else{
+        } else {
             int bit = random.nextInt(bitNumber);
             currentAry[bit] ^= 1;
             return currentAry;

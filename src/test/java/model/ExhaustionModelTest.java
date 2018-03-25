@@ -3,6 +3,7 @@ package model;
 import evaluator.EvaluateFunction;
 import evaluator.EvaluatorFactory;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import transition.LongTransition;
 import transition.TransitFactory;
@@ -50,6 +51,7 @@ public class ExhaustionModelTest {
         Assert.assertEquals("11111111111111111111",result);
     }
 
+    @Ignore
     @Test
     public void when_30bit_then_resultIs30times() {
 

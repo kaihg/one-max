@@ -11,11 +11,18 @@ public interface AlgorithmModel {
 
     void setEvaluator(EvaluateFunction evaluator);
 
+    /**
+     * Computer the final result for iteration.
+     */
     void start();
 
-    void iterateOnce(int[] current);
+    /**
+     * Just compute once
+     */
+    void iterateOnce();
 
     String getResult();
+
     int getScore();
 
 }

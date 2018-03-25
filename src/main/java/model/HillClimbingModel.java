@@ -4,7 +4,6 @@ import evaluator.EvaluateFunction;
 import transition.LongTransition;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class HillClimbingModel implements AlgorithmModel{
 
@@ -15,7 +14,7 @@ public class HillClimbingModel implements AlgorithmModel{
     private int iterationTimes;
     private int[] bestObj;
 
-    //    private int[] current;
+    private int[] current;
     private int[] tempAry;
     private int score;
 
@@ -36,6 +35,8 @@ public class HillClimbingModel implements AlgorithmModel{
         }
         transition.setDefaultValue(builder.toString());
 
+        current = transition.next();
+        score = evaluateFunction.evaluate(current);
     }
 
     @Override
@@ -52,13 +53,10 @@ public class HillClimbingModel implements AlgorithmModel{
     public void start() {
         init();
 
-        int[] current = transition.next();
-
-        score = evaluateFunction.evaluate(current);
-        int maxScore = bitCount;
+        int maxScore = evaluateFunction.maxScore(this.tempAry);
 
         for (int i = 0; i < iterationTimes; i++) {
-            this.iterateOnce(current);
+            this.iterateOnce();
 
             if (score == maxScore) {
                 break;
@@ -67,7 +65,7 @@ public class HillClimbingModel implements AlgorithmModel{
     }
 
     @Override
-    public void iterateOnce(int[] current) {
+    public void iterateOnce() {
         // find better neighbor with "bitCount" times at most
         transition.neighbor(current, tempAry);
 
@@ -91,6 +89,6 @@ public class HillClimbingModel implements AlgorithmModel{
 
     @Override
     public int getScore() {
-        return IntStream.of(bestObj).sum();
+        return score;
     }
 }

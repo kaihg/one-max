@@ -43,7 +43,7 @@ public class ExhaustionModel implements AlgorithmModel {
     }
 
     @Override
-    public void iterateOnce(int[] current) {
+    public void iterateOnce() {
 
     }
 

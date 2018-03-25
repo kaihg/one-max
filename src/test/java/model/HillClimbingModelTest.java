@@ -48,7 +48,7 @@ public class HillClimbingModelTest {
     }
 
     private void simpleTestResult(int bit) {
-        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bit, 30, 1000, 1);
+        AlgorithmModel model = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bit, 1, 1000, 1);
         model.start();
         Assert.assertEquals(bit, model.getScore());
 

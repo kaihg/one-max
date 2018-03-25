@@ -38,17 +38,50 @@ public class ModelFactory {
                 break;
         }
 
-        if (runTimes > 1) {
-            model = new RepeatModel(model, runTimes);
-        }
         if (neighborPickCount > 1) {
             transition = new BestNeighborTransition(transition, neighborPickCount, function);
         }
+
+        if (runTimes > 1) {
+            AlgorithmModel[] models = new AlgorithmModel[runTimes];
+            for (int i = 0; i < runTimes; i++) {
+                models[i] = createModel(algorithm, bitCount, 1, iterationCount, neighborPickCount);
+            }
+            model = new RepeatModel(models, runTimes);
+            return model;
+        }
+
 
         model.setEvaluator(function);
         model.setTransit(transition);
 
         return model;
     }
+
+//    public static AlgorithmModel createRepeatModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount) {
+//        AlgorithmModel model;
+//        LongTransition transition;
+//        EvaluateFunction function;
+//
+//
+//        if (runTimes > 1) {
+//            AlgorithmModel[] models = new AlgorithmModel[runTimes];
+//            for (int i = 0; i < runTimes; i++) {
+//                models[i] = createModel(algorithm,bitCount,1,iterationCount,neighborPickCount);
+//            }
+//            model = new RepeatModel(models,runTimes);
+//        }else{
+//            return ModelFactory.createModel(algorithm,bitCount,runTimes,iterationCount,neighborPickCount);
+//        }
+//
+//        if (neighborPickCount > 1) {
+//            transition = new BestNeighborTransition(transition, neighborPickCount, function);
+//        }
+//
+//        model.setEvaluator(function);
+//        model.setTransit(transition);
+//
+//        return model;
+//    }
 
 }

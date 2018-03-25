@@ -4,7 +4,6 @@ import evaluator.EvaluateFunction;
 import transition.LongTransition;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class SimulatedAnnealingModel implements AlgorithmModel {
 
@@ -19,13 +18,17 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
     private int maxIteration;
 
     private Random random = new Random();
+    private int[] current;
     private int[] tempAry;
 
 
     SimulatedAnnealingModel(int bitCount, int iteration, int startTemperature) {
         this.bitCount = bitCount;
         maxIteration = iteration;
+
         this.deltaScale = 1d - 1d / startTemperature;
+//        temperature = 10;
+//        deltaScale = 0.99;
 
         bestObj = new int[bitCount];
         tempAry = new int[bitCount];
@@ -40,6 +43,8 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
         }
         transition.setDefaultValue(builder.toString());
 
+        current = transition.next();
+        score = evaluateFunction.evaluate(current);
     }
 
     @Override
@@ -56,24 +61,18 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
     public void start() {
         init();
 
-        int[] current = transition.next();
-//        int[] tempAry = new int[bitCount];
-
-        score = evaluateFunction.evaluate(current);
-        int maxScore = bitCount;
-
-//        double minTemper = 0.0001;
+        int maxScore = evaluateFunction.maxScore(this.tempAry);
         int count = 0;
 
         while (count < maxIteration && score < maxScore) {
-            iterateOnce(current);
+            iterateOnce();
             count++;
         }
 
     }
 
     @Override
-    public void iterateOnce(int[] current) {
+    public void iterateOnce() {
         transition.neighbor(current, tempAry);
         int score2 = evaluateFunction.evaluate(tempAry);
 
@@ -108,6 +107,6 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
 
     @Override
     public int getScore() {
-        return IntStream.of(bestObj).sum();
+        return score;
     }
 }

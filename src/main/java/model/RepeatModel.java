@@ -5,56 +5,62 @@ import transition.LongTransition;
 
 public class RepeatModel implements AlgorithmModel {
 
-    private AlgorithmModel model;
+    private AlgorithmModel[] models;
     private int repeatTimes;
-    private String result = "";
-    private int bestScore;
 
-    public RepeatModel(AlgorithmModel model, int repeat) {
-        this.model = model;
+    public RepeatModel(AlgorithmModel[] models, int repeat) {
+        this.models = models;
         this.repeatTimes = repeat;
+    }
+
+    public RepeatModel(AlgorithmModel[] models) {
+        this.models = models;
+        this.repeatTimes = models.length;
     }
 
     @Override
     public void init() {
-        this.model.init();
+        for (AlgorithmModel model : models) {
+            model.init();
+        }
     }
 
     @Override
     public void setTransit(LongTransition transit) {
-        this.model.setTransit(transit);
     }
 
     @Override
     public void setEvaluator(EvaluateFunction evaluator) {
-        this.model.setEvaluator(evaluator);
     }
 
     @Override
     public void start() {
-        int score = 0;
-        String result = "";
-        for (int i = 0; i < repeatTimes; i++) {
-            this.model.start();
-            score += model.getScore();
+        for (AlgorithmModel model : models) {
+            model.start();
         }
 
-        this.bestScore = score / repeatTimes;
-        this.result = result;
     }
 
     @Override
-    public void iterateOnce(int[] current) {
-
+    public void iterateOnce() {
+        for (AlgorithmModel model : models) {
+            model.iterateOnce();
+        }
     }
 
     @Override
     public String getResult() {
-        return result;
+        return "";
     }
 
     @Override
     public int getScore() {
-        return bestScore;
+        double score = 0d;
+        if (models != null) {
+            for (AlgorithmModel model : models) {
+                score += model.getScore();
+            }
+        }
+        return (int) Math.round(score / repeatTimes);
     }
 }
