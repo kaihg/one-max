@@ -11,6 +11,8 @@ public class TransitFactory {
                 return new IncreaseTransition(startValue, bitNumber);
             case RANDOM_NEIGHBOR:
                 return new RandomNeighborTransition(startValue, bitNumber);
+            case LAST_REJECT:
+                return new MemoryTransition(startValue, bitNumber);
         }
         return null;
     }

@@ -14,6 +14,7 @@ public class ModelFactory {
     public static final String EXHAUSTION_SEARCH = "es";
     public static final String HILL_CLIMBING = "hc";
     public static final String SIMULATED_ANNEALING = "sa";
+    public static final String TABU_SEARCH = "ts";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount) {
         AlgorithmModel model;
@@ -34,6 +35,11 @@ public class ModelFactory {
             case SIMULATED_ANNEALING:
                 model = new SimulatedAnnealingModel(bitCount, iterationCount, iterationCount);
                 transition = TransitFactory.createLongIterator(TransitType.RANDOM_NEIGHBOR, Optional.of("0"), bitCount);
+                function = EvaluatorFactory.createLongEvaluator();
+                break;
+            case TABU_SEARCH:
+                model = new TabuModel(bitCount, iterationCount);
+                transition = TransitFactory.createLongIterator(TransitType.LAST_REJECT, Optional.of("0"), bitCount);
                 function = EvaluatorFactory.createLongEvaluator();
                 break;
         }
