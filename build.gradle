@@ -1,5 +1,5 @@
 group 'nchu'
-version 'ExhaustionSearch'
+version 'HillClimbing'
 
 apply plugin: 'java'
 

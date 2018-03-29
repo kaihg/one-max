@@ -16,7 +16,7 @@ public class ModelFactory {
     public static final String SIMULATED_ANNEALING = "sa";
     public static final String TABU_SEARCH = "ts";
 
-    public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount) {
+    public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount, int... extraParams) {
         AlgorithmModel model;
         LongTransition transition;
         EvaluateFunction function;
