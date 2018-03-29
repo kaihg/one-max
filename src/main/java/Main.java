@@ -8,7 +8,7 @@ public class Main {
         int runTimes = 30;
         int iterationCount = 1000;
         int neighborPIckCount = 1;
-        int[] extras = new int[args.length - 5];
+        double[] extras = new double[args.length - 5];
         if (args.length > 0) {
             try {
                 algorithm = args[0];
@@ -26,6 +26,8 @@ public class Main {
         }
 
         AlgorithmModel model = ModelFactory.createModel(algorithm, testN, runTimes, iterationCount, neighborPIckCount, extras);
+
+        System.out.println("Start " + ModelFactory.getAlgorithmName(algorithm));
         model.start();
         System.out.println(String.format("The one-max result of 2^%d is %s, it's score is %d", testN, model.getResult(), model.getScore()));
     }

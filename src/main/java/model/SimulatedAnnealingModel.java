@@ -22,7 +22,7 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
     private int[] tempAry;
 
 
-    SimulatedAnnealingModel(int bitCount, int iteration, int startTemperature) {
+    SimulatedAnnealingModel(int bitCount, int iteration, double startTemperature) {
         this.bitCount = bitCount;
         maxIteration = iteration;
 
