@@ -41,14 +41,13 @@ public class CompositeModel {
                              int bitCount,
                              int neighborPick) {
         AlgorithmModel modelHC = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bitCount, repeatTimes, iteration, neighborPick);
-        AlgorithmModel modelSA = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, bitCount, repeatTimes, iteration, neighborPick);
+        AlgorithmModel modelSA = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, bitCount, repeatTimes, iteration, neighborPick, 1d, 0.99);
 
         modelHC.init();
         modelSA.init();
         for (int i = 0; i <= iteration; i++) {
-            if (i % 10 == 0) {
-                System.out.println(String.format("%d,%d,%d", i, modelHC.getScore(), modelSA.getScore()));
-            }
+
+            System.out.println(String.format("%d,%d,%d", i, modelHC.getScore(), modelSA.getScore()));
 
             modelHC.iterateOnce();
             modelSA.iterateOnce();
