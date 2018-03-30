@@ -12,7 +12,7 @@ public class BestNeigTranstitionTest {
     @Test
     public void when_ten_neighbor_then_diff_1() {
         EvaluateFunction function = EvaluatorFactory.createLongEvaluator();
-        LongTransition transition = new BestNeighborTransition(new RandomNeighborTransition(0, 100), 10, function);
+        LongTransition<int[]> transition = new BestNeighborTransition(new RandomNeighborTransition(0, 100), 10, function);
 
         int[] start = transition.next();
         int[] current = Arrays.copyOf(start, 100);

@@ -13,7 +13,7 @@ public class IncreaseTransitTest {
 
 
         for (int i = 0; i < 100; i++) {
-            LongTransition transit = new IncreaseTransition(start, bitCount);
+            LongTransition<int[]> transit = new IncreaseTransition(start, bitCount);
             Assert.assertArrayEquals(temp, transit.next());
         }
 

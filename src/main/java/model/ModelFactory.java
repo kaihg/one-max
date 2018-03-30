@@ -15,11 +15,12 @@ public class ModelFactory {
     public static final String HILL_CLIMBING = "hc";
     public static final String SIMULATED_ANNEALING = "sa";
     public static final String TABU_SEARCH = "ts";
+    public static final String GENETIC_ALGORITHM = "ga";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount, double... extraParams) {
-        AlgorithmModel model;
-        LongTransition transition;
-        EvaluateFunction function;
+        AlgorithmModel model = null;
+        LongTransition transition = null;
+        EvaluateFunction function = null;
         switch (algorithm) {
             case EXHAUSTION_SEARCH:
                 model = new ExhaustionModel();
@@ -42,6 +43,8 @@ public class ModelFactory {
                 model = new TabuModel(bitCount, iterationCount);
                 transition = TransitFactory.createLongIterator(TransitType.LAST_REJECT, Optional.of("0"), bitCount);
                 function = EvaluatorFactory.createLongEvaluator();
+                break;
+            case GENETIC_ALGORITHM:
                 break;
         }
 
@@ -70,12 +73,15 @@ public class ModelFactory {
             case EXHAUSTION_SEARCH:
                 return "exhaustion search";
             case HILL_CLIMBING:
-            default:
                 return "hill climbing search";
             case SIMULATED_ANNEALING:
                 return "simulated annealing";
             case TABU_SEARCH:
                 return "tabu search";
+            case GENETIC_ALGORITHM:
+                return "Genetic Algorithm";
+            default:
+                return "Nothing";
         }
     }
 

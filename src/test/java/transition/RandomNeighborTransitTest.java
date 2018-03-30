@@ -11,7 +11,7 @@ public class RandomNeighborTransitTest {
 
     @Test
     public void when_oneBitTransitCallNext_then_onlyExist0or1() {
-        LongTransition iterator = new RandomNeighborTransition(0, 1);
+        LongTransition<int[]> iterator = new RandomNeighborTransition(0, 1);
 
         for (int i = 0; i < 1000; i++) {
             int[] next = iterator.next();
@@ -27,7 +27,7 @@ public class RandomNeighborTransitTest {
 
     @Test
     public void when_twoBitTransitCallNext_then_onlyExist0123() {
-        LongTransition iterator = new RandomNeighborTransition(0, 2);
+        LongTransition<int[]> iterator = new RandomNeighborTransition(0, 2);
 
         for (int i = 0; i < 1000; i++) {
             int[] next = iterator.next();
@@ -43,22 +43,23 @@ public class RandomNeighborTransitTest {
 
     @Test
     public void when_callNext_then_neitherEqual() {
-        LongTransition iterator = new RandomNeighborTransition(0, 3);
+        LongTransition<int[]> iterator = new RandomNeighborTransition(0, 3);
 
-        int[] temp = iterator.next();
+        int[] temp = Arrays.copyOf(iterator.next(), 3);
         for (int i = 0; i < 1000; i++) {
             int[] next = iterator.next();
-//            Assert.assertNotEquals(temp,next);
+
             boolean isEqual = Arrays.equals(temp, next);
             Assert.assertFalse(isEqual);
-            temp = next;
+
+            System.arraycopy(next, 0, temp, 0, 3);
         }
     }
 
     @Ignore
     @Test
     public void checkListByEyes() {
-        LongTransition iterator = new RandomNeighborTransition(0, 3);
+        LongTransition<int[]> iterator = new RandomNeighborTransition(0, 3);
         for (int i = 0; i < 30; i++) {
             System.out.println(Arrays.toString(iterator.next()));
         }
@@ -69,14 +70,14 @@ public class RandomNeighborTransitTest {
         long startNumber = 5;
         int[] startArray = {1, 0, 1, 0};
         for (int i = 0; i < 100; i++) {
-            LongTransition iterator = new RandomNeighborTransition(startNumber, 4);
+            LongTransition<int[]> iterator = new RandomNeighborTransition(startNumber, 4);
             Assert.assertArrayEquals(startArray, iterator.next());
         }
     }
 
     @Test
     public void when_next_then_getOneBitChange() throws Exception {
-        LongTransition transition = new RandomNeighborTransition(0,1);
+        LongTransition<int[]> transition = new RandomNeighborTransition(0, 1);
         Assert.assertArrayEquals(new int[]{0},transition.next());
         Assert.assertArrayEquals(new int[]{1},transition.next());
         Assert.assertArrayEquals(new int[]{0},transition.next());
@@ -84,7 +85,7 @@ public class RandomNeighborTransitTest {
 
     @Test
     public void when_setDefault_then_getTheValue() throws Exception {
-        LongTransition transition = new RandomNeighborTransition(0,5);
+        LongTransition<int[]> transition = new RandomNeighborTransition(0, 5);
 
         Assert.assertArrayEquals(new int[]{0,0,0,0,0},transition.next());
 
@@ -98,7 +99,7 @@ public class RandomNeighborTransitTest {
     @Test
     public void only1DistanceBetween2Neighbors() {
         int length = 10;
-        LongTransition transition = new RandomNeighborTransition(4, length);
+        LongTransition<int[]> transition = new RandomNeighborTransition(4, length);
 
         int[] neighbor = new int[length];
         for (int i = 0; i < 50; i++) {

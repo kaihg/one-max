@@ -2,7 +2,7 @@ package transition;
 
 import java.util.Random;
 
-class RandomNeighborTransition implements LongTransition {
+class RandomNeighborTransition implements LongTransition<int[]> {
 
     private int[] currentAry;
     private int bitNumber;

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class ExhaustionModel implements AlgorithmModel {
 
-    private LongTransition transit;
+    private LongTransition<int[]> transit;
     private EvaluateFunction<int[]> evalutor;
 
     private int[] bestObj = {};

@@ -10,7 +10,7 @@ public class MemoryTransitionTest {
     @Test
     public void testMemorySize() {
         int bitSize = 10;
-        LongTransition transition = new MemoryTransition(0, bitSize);
+        LongTransition<int[]> transition = new MemoryTransition(0, bitSize);
 
         int[] current = new int[bitSize];
         int[] tempAry = new int[bitSize];

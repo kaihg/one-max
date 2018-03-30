@@ -4,13 +4,13 @@ import evaluator.EvaluateFunction;
 
 import java.util.Arrays;
 
-public class BestNeighborTransition implements LongTransition {
+public class BestNeighborTransition implements LongTransition<int[]> {
 
-    private LongTransition transition;
+    private LongTransition<int[]> transition;
     private int maxCompareCount = 1;
     private EvaluateFunction<int[]> evaluateFunction;
 
-    public BestNeighborTransition(LongTransition transition, int maxCompareCount, EvaluateFunction<int[]> evaluateFunction) {
+    public BestNeighborTransition(LongTransition<int[]> transition, int maxCompareCount, EvaluateFunction<int[]> evaluateFunction) {
         this.transition = transition;
         this.maxCompareCount = maxCompareCount;
         this.evaluateFunction = evaluateFunction;

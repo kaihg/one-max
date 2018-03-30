@@ -16,7 +16,7 @@ public class TabuModel implements AlgorithmModel {
     private int[] tempAry;
     private int[] bestObj;
 
-    private LongTransition transition;
+    private LongTransition<int[]> transition;
     private EvaluateFunction<int[]> evaluate;
 
 

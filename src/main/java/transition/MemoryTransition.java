@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class MemoryTransition implements LongTransition {
+public class MemoryTransition implements LongTransition<int[]> {
 
     private static final int TABU_MAGIC_MEMORY_SIZE = 7;
 

@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class HillClimbingModel implements AlgorithmModel{
 
-    private LongTransition transition;
+    private LongTransition<int[]> transition;
     private EvaluateFunction<int[]> evaluateFunction;
 
     private int bitCount;

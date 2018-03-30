@@ -1,13 +1,14 @@
 package transition;
 
-public interface LongTransition {
+public interface LongTransition<T> {
 
     void setDefaultValue(String value);
 
     boolean hasNext();
 
-    void neighbor(int[] current,int[] empty);
-    int[] next();
+    void neighbor(T current, T empty);
+
+    T next();
 
     static void convertLongToIntAry(int bitCount,long value, int[] saveAry){
         for (int i = 0; i < bitCount; i++) {
