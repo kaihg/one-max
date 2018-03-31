@@ -31,6 +31,9 @@ T = T * scale after one iteration finished. The model will stop if T < 0.0001.
 The Tabu memory queue size is 7. It is a magic number which defined by the inventor.
 It will not choose the neighbor who is in the memory queue.
 
+### Genetic Algorithm
+With population, crossover rate, mutation rate, it will find the fitness one.
+
 ## Versions
 ### ExhaustionSearch (2018/3/16)
 1. Implement the exhaustion search.
@@ -44,3 +47,6 @@ It will not choose the neighbor who is in the memory queue.
 
 ### Tabu Search (2018/3/29)
 1. Implement the Tabu search and test
+
+### Genetic Algorithm (2018/3/31)
+1. Implement the Genetic algorithm and test.
