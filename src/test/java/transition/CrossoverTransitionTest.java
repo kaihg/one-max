@@ -35,6 +35,27 @@ public class CrossoverTransitionTest {
 
     }
 
+    @Test
+    public void when_rateIs0_then_noItemChange() {
+        LongTransition<int[][]> transition = new CrossoverTransition(0);
+
+        int[][] src = {
+                {1, 1, 0, 0}, {0, 0, 1, 1},
+                {1, 0, 0, 1}, {0, 1, 1, 0}
+        };
+
+        int[][] temp = {
+                {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}
+        };
+
+        transition.neighbor(src, temp);
+
+        Assert.assertArrayEquals(src[0], temp[0]);
+        Assert.assertArrayEquals(src[1], temp[1]);
+        Assert.assertArrayEquals(src[2], temp[2]);
+        Assert.assertArrayEquals(src[3], temp[3]);
+    }
+
     private boolean checkChild(int[][] probability, int[] child) {
         for (int[] prob : probability) {
             if (Arrays.equals(child, prob)) {

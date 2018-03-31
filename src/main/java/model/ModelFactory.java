@@ -45,6 +45,9 @@ public class ModelFactory {
                 function = EvaluatorFactory.createLongEvaluator();
                 break;
             case GENETIC_ALGORITHM:
+                model = new GeneticModel(iterationCount, (int) extraParams[0], bitCount);
+                transition = TransitFactory.createGeneticTransition(extraParams[1], extraParams[2]);
+                function = EvaluatorFactory.createLongEvaluator();
                 break;
         }
 

@@ -17,4 +17,8 @@ public class TransitFactory {
         return null;
     }
 
+    public static LongTransition<int[][]> createGeneticTransition(double crossoverRate, double mutationRate) {
+        return new GeneticTransition(crossoverRate, mutationRate);
+    }
+
 }
