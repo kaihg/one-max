@@ -50,17 +50,36 @@ public class RepeatModel implements AlgorithmModel {
 
     @Override
     public String getResult() {
-        return "";
+        // return the best one
+        double score = 0;
+        AlgorithmModel bestOne = models[0];
+        for (AlgorithmModel model : models) {
+            if (model.getScore() > score) {
+                score = model.getScore();
+                bestOne = model;
+            }
+        }
+        return bestOne.getResult();
     }
 
     @Override
     public int getScore() {
-        double score = 0d;
+        // 找平均
+//        double score = 0d;
+//        if (models != null) {
+//            for (AlgorithmModel model : models) {
+//                score += model.getScore();
+//            }
+//        }
+//        return (int) Math.round(score / repeatTimes);
+
+        // 找最佳
+        double score = 0;
         if (models != null) {
             for (AlgorithmModel model : models) {
-                score += model.getScore();
+                score = Math.max(score, model.getScore());
             }
         }
-        return (int) Math.round(score / repeatTimes);
+        return (int) score;
     }
 }
