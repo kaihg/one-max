@@ -35,6 +35,27 @@ public class CompositeModel {
         startToTest(repeatTimes, iteration, bitCount, neighborPick);
     }
 
+    @Test
+    public void compare_HC_GA_on_8_neighbor_with_100Bit_in_500_iteration() {
+        int repeatTimes = 30;
+        int iteration = 500;
+        int bitCount = 100;
+        int neighborPick = 8;
+
+
+        AlgorithmModel modelHC = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bitCount, repeatTimes, iteration, neighborPick);
+        AlgorithmModel modelGA = ModelFactory.createModel(ModelFactory.GENETIC_ALGORITHM, bitCount, repeatTimes, iteration, 1, 8d, 0.6, 0.1);
+
+        modelHC.init();
+        modelGA.init();
+        for (int i = 0; i <= iteration; i++) {
+
+            System.out.println(String.format("%d,%d,%d", i, modelHC.getScore(), modelGA.getScore()));
+
+            modelHC.iterateOnce();
+            modelGA.iterateOnce();
+        }
+    }
 
     private void startToTest(int repeatTimes,
                              int iteration,

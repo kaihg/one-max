@@ -58,7 +58,7 @@ public class ModelFactory {
         if (runTimes > 1) {
             AlgorithmModel[] models = new AlgorithmModel[runTimes];
             for (int i = 0; i < runTimes; i++) {
-                models[i] = createModel(algorithm, bitCount, 1, iterationCount, neighborPickCount);
+                models[i] = createModel(algorithm, bitCount, 1, iterationCount, neighborPickCount, extraParams);
             }
             model = new RepeatModel(models, runTimes);
             return model;

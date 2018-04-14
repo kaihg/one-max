@@ -33,6 +33,7 @@ It will not choose the neighbor who is in the memory queue.
 
 ### Genetic Algorithm
 With population, crossover rate, mutation rate, it will find the fitness one.
+However, it is not fast as Hill Climbing.
 
 ## Versions
 ### ExhaustionSearch (2018/3/16)
