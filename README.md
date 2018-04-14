@@ -35,6 +35,16 @@ It will not choose the neighbor who is in the memory queue.
 With population, crossover rate, mutation rate, it will find the fitness one.
 However, it is not fast as Hill Climbing.
 
+### Genetic Algorithm for TKP
+解背包問題，參數意義如下
+長度為10的array。
+重覆30次找最佳解，每個model跑1000次iteration，只找一個鄰居(無用)
+population 大小為 20，交配機率=0.6, 突變機率=0.1
+限重 20，石頭為 1 2,3 4,5 6,7 8 ,9 10 ,1 1, 2 2, 3 3, 4 4, 5 5，兩兩一組，為 weight, value
+
+參數最後如下
+ga_tkp 10 30 1000 1 20 0.6 0.1 20 1 2 3 4 5 6 7 8 9 10 1 1 2 2 3 3 4 4 5 5
+
 ## Versions
 ### ExhaustionSearch (2018/3/16)
 1. Implement the exhaustion search.
