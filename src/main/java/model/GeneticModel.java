@@ -159,8 +159,11 @@ public class GeneticModel implements AlgorithmModel {
 
         int[] bestObj = current[best];
         StringBuilder builder = new StringBuilder();
-        for (int i = bestObj.length - 1; i >= 0; i--) {
-            builder.append(bestObj[i]);
+//        for (int i = bestObj.length - 1; i >= 0; i--) {
+//            builder.append(bestObj[i]);
+//        }
+        for (int aBestObj : bestObj) {
+            builder.append(aBestObj);
         }
         return builder.toString();
     }

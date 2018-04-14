@@ -18,7 +18,7 @@ public class Main {
                 neighborPIckCount = Integer.parseInt(args[4]);
 
                 for (int i = 0; i < extras.length; i++) {
-                    extras[i] = Integer.parseInt(args[i + 5]);
+                    extras[i] = Double.parseDouble(args[i + 5]);
                 }
             } catch (NumberFormatException e) {
                 e.printStackTrace();

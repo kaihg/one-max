@@ -7,6 +7,7 @@ import transition.LongTransition;
 import transition.TransitFactory;
 import transition.TransitType;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class ModelFactory {
@@ -16,6 +17,7 @@ public class ModelFactory {
     public static final String SIMULATED_ANNEALING = "sa";
     public static final String TABU_SEARCH = "ts";
     public static final String GENETIC_ALGORITHM = "ga";
+    public static final String GENETIC_ALGORITHM_TKP = "ga_tkp";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount, double... extraParams) {
         AlgorithmModel model = null;
@@ -48,6 +50,11 @@ public class ModelFactory {
                 model = new GeneticModel(iterationCount, (int) extraParams[0], bitCount);
                 transition = TransitFactory.createGeneticTransition(extraParams[1], extraParams[2]);
                 function = EvaluatorFactory.createLongEvaluator();
+                break;
+            case GENETIC_ALGORITHM_TKP:
+                model = new GeneticModel(iterationCount, (int) extraParams[0], bitCount);
+                transition = TransitFactory.createGeneticTransition(extraParams[1], extraParams[2]);
+                function = EvaluatorFactory.createTKPEvaluator(Arrays.copyOfRange(extraParams, 3, extraParams.length));
                 break;
         }
 
@@ -83,6 +90,8 @@ public class ModelFactory {
                 return "tabu search";
             case GENETIC_ALGORITHM:
                 return "Genetic Algorithm";
+            case GENETIC_ALGORITHM_TKP:
+                return "Genetic Algorithm for TKP problem";
             default:
                 return "Nothing";
         }
