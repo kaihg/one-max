@@ -45,6 +45,20 @@ population 大小為 20，交配機率=0.6, 突變機率=0.1
 參數最後如下
 ga_tkp 10 30 1000 1 20 0.6 0.1 20 1 2 3 4 5 6 7 8 9 10 1 1 2 2 3 3 4 4 5 5
 
+## Extra Problem Solve
+### Travel Knapsack Problem
+假設有一個背包的負重最多可達8公斤，而希望在背包中裝入負重範圍內可得之總價物品，假設是水果好了，水果的編號、單價與重量如下所示：
+0	李子	4KG	NT$4500
+1	蘋果	5KG	NT$5700
+2	橘子	2KG	NT$2250
+3	草莓	1KG	NT$1100
+4	甜瓜	6KG	NT$6700
+最佳解為放入草莓、橘子與蘋果，而總價為9050元。
+
+The parameters of algorithms is written in param.json.
+The best one is Genetic, and others is sa, tabu, hc.
+
+
 ## Versions
 ### ExhaustionSearch (2018/3/16)
 1. Implement the exhaustion search.
@@ -61,3 +75,8 @@ ga_tkp 10 30 1000 1 20 0.6 0.1 20 1 2 3 4 5 6 7 8 9 10 1 1 2 2 3 3 4 4 5 5
 
 ### Genetic Algorithm (2018/3/31)
 1. Implement the Genetic algorithm and test.
+
+### TKP (2018/4/20)
+1. Add CompareModel to compare algorithms
+2. It is only for TKP now.
+3. Add Factory function to read setting from json file
