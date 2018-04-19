@@ -15,6 +15,10 @@ public class EvaluatorFactory {
         return new ProductEvaluator(params[0], createProducts(Arrays.copyOfRange(params, 1, params.length)));
     }
 
+    public static EvaluateFunction createTKPEvaluator(double maxWeight, Product[] params) {
+        return new ProductEvaluator(maxWeight, params);
+    }
+
     private static Product[] createProducts(double... weight_values) {
         int length = weight_values.length / 2;
         Product[] items = new Product[length];

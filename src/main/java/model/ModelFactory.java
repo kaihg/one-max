@@ -1,12 +1,17 @@
 package model;
 
+import com.google.gson.Gson;
 import evaluator.EvaluateFunction;
 import evaluator.EvaluatorFactory;
 import transition.BestNeighborTransition;
 import transition.LongTransition;
 import transition.TransitFactory;
 import transition.TransitType;
+import vo.Config;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -18,6 +23,7 @@ public class ModelFactory {
     public static final String TABU_SEARCH = "ts";
     public static final String GENETIC_ALGORITHM = "ga";
     public static final String GENETIC_ALGORITHM_TKP = "ga_tkp";
+    public static final String TKP_COMPARE = "tkp";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount, double... extraParams) {
         AlgorithmModel model = null;
@@ -78,6 +84,46 @@ public class ModelFactory {
         return model;
     }
 
+    public static AlgorithmModel createTKPCompareModels(String paramPath) throws FileNotFoundException {
+
+        Config config = parseJsonFile(paramPath);
+
+        EvaluateFunction function = EvaluatorFactory.createTKPEvaluator(config.maxWeight, config.items);
+        AlgorithmModel[] models = new AlgorithmModel[config.compareAlgorithms.length];
+
+        int bitCount = config.items.length;
+        for (int i = 0; i < config.compareAlgorithms.length; i++) {
+            String name = config.compareAlgorithms[i];
+            models[i] = createModel(name, bitCount, config.iteration, config);
+            models[i].setEvaluator(function);
+        }
+
+        CompareModel compareModel = new CompareModel(models, config.iteration, config.compareAlgorithms);
+
+        return compareModel;
+    }
+
+    private static AlgorithmModel createModel(String algorithm, int bitCount, int iteration, Config config) {
+        switch (algorithm) {
+            case HILL_CLIMBING:
+                return createModel(algorithm, bitCount, config.runTimes, iteration, config.hillClimbingParam.neighbor);
+            case SIMULATED_ANNEALING:
+                return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.simulateAnnealingParam.temperature);
+            case TABU_SEARCH:
+                return createModel(algorithm, bitCount, config.runTimes, iteration, config.hillClimbingParam.neighbor);
+            case GENETIC_ALGORITHM:
+                return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.geneticParam.population, config.geneticParam.crossoverRate, config.geneticParam.mutationRate);
+        }
+        return null;
+    }
+
+    private static Config parseJsonFile(String path) throws FileNotFoundException {
+        System.out.println(path);
+        ClassLoader classLoader = ModelFactory.class.getClassLoader();
+        File file = new File(classLoader.getResource(path).getFile());
+        return new Gson().fromJson(new FileReader(file), Config.class);
+    }
+
     public static String getAlgorithmName(String shortCode) {
         switch (shortCode) {
             case EXHAUSTION_SEARCH:
@@ -92,6 +138,8 @@ public class ModelFactory {
                 return "Genetic Algorithm";
             case GENETIC_ALGORITHM_TKP:
                 return "Genetic Algorithm for TKP problem";
+            case TKP_COMPARE:
+                return "TKP";
             default:
                 return "Nothing";
         }

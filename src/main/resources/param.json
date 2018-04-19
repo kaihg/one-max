@@ -1,0 +1,47 @@
+{
+  "compareAlgorithms": [
+    "hc",
+    "sa",
+    "ts",
+    "ga"
+  ],
+  "items": [
+    {
+      "value": 4500,
+      "weight": 4
+    },
+    {
+      "value": 5700,
+      "weight": 5
+    },
+    {
+      "value": 2250,
+      "weight": 2
+    },
+    {
+      "value": 1100,
+      "weight": 1
+    },
+    {
+      "value": 6700,
+      "weight": 6
+    }
+  ],
+  "maxWeight": 8,
+  "iteration": 1000,
+  "runTimes": 30,
+  "hillClimbingParam": {
+    "neighbor": 10
+  },
+  "simulateAnnealingParam": {
+    "temperature": 1
+  },
+  "tabuSearchParam": {
+    "neighbor": 10
+  },
+  "geneticParam": {
+    "population": 10,
+    "crossoverRate": 0.6,
+    "mutationRate": 0.1
+  }
+}
