@@ -47,10 +47,10 @@ public class CompareModel implements AlgorithmModel {
                 this.resultRecord.append("\n");
             }
         }
-
+        saveAllModelResult(0);
         for (int i = 0; i < iteration; i++) {
             iterateOnce();
-            saveAllModelResult();
+            saveAllModelResult(i + 1);
         }
 
         System.out.println();
@@ -65,8 +65,8 @@ public class CompareModel implements AlgorithmModel {
         }
     }
 
-    private void saveAllModelResult() {
-
+    private void saveAllModelResult(int index) {
+        resultRecord.append(index).append(",");
         for (AlgorithmModel model : models) {
             resultRecord.append(model.getScore()).append(",");
         }
