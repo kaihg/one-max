@@ -3,6 +3,8 @@ package model;
 import evaluator.EvaluateFunction;
 import transition.LongTransition;
 
+import java.util.Random;
+
 public class RepeatModel implements AlgorithmModel {
 
     private AlgorithmModel[] models;
@@ -19,9 +21,10 @@ public class RepeatModel implements AlgorithmModel {
     }
 
     @Override
-    public void init() {
+    public void init(int seed) {
+        Random random = new Random(seed);
         for (AlgorithmModel model : models) {
-            model.init();
+            model.init(random.nextInt());
         }
     }
 
@@ -71,21 +74,21 @@ public class RepeatModel implements AlgorithmModel {
     @Override
     public int getScore() {
         // 找平均
-        double score = 0d;
-        if (models != null) {
-            for (AlgorithmModel model : models) {
-                score += model.getScore();
-            }
-        }
-        return (int) Math.round(score / repeatTimes);
-
-        // 找最佳
-//        double score = 0;
+//        double score = 0d;
 //        if (models != null) {
 //            for (AlgorithmModel model : models) {
-//                score = Math.max(score, model.getScore());
+//                score += model.getScore();
 //            }
 //        }
-//        return (int) score;
+//        return (int) Math.round(score / repeatTimes);
+
+        // 找最佳
+        double score = 0;
+        if (models != null) {
+            for (AlgorithmModel model : models) {
+                score = Math.max(score, model.getScore());
+            }
+        }
+        return (int) score;
     }
 }

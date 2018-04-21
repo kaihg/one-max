@@ -32,11 +32,12 @@ public class GeneticModel implements AlgorithmModel {
 
 
         this.bitCount = bitCount;
-        this.random = new Random();
+
     }
 
     @Override
-    public void init() {
+    public void init(int seed) {
+        this.random = new Random(seed);
         for (int i = 0; i < current.length; i++) {
             int[] item = current[i];
             for (int j = 0; j < bitCount; j++) {
@@ -57,7 +58,9 @@ public class GeneticModel implements AlgorithmModel {
 
     @Override
     public void start() {
-        init();
+        Random random = new Random();
+        int childSeed = random.nextInt();
+        this.init(childSeed);
 
 //        int best = evaluator.maxScore(current[0]);
         for (int i = 0; i < iteration; i++) {

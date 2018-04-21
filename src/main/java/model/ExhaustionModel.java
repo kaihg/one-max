@@ -14,7 +14,7 @@ public class ExhaustionModel implements AlgorithmModel {
     private int bestScore;
 
     @Override
-    public void init() {
+    public void init(int seed) {
         bestScore = 0;
     }
 
@@ -30,7 +30,7 @@ public class ExhaustionModel implements AlgorithmModel {
 
     @Override
     public void start() {
-        init();
+        init(0);
 
         while(transit.hasNext()){
             int[] nextObj = transit.next();

@@ -3,6 +3,8 @@ package model;
 import evaluator.EvaluateFunction;
 import transition.LongTransition;
 
+import java.util.Random;
+
 public class CompareModel implements AlgorithmModel {
 
     private AlgorithmModel[] models;
@@ -19,9 +21,11 @@ public class CompareModel implements AlgorithmModel {
     }
 
     @Override
-    public void init() {
+    public void init(int seed) {
+        Random random = new Random(seed);
+        int childSeed = random.nextInt();
         for (AlgorithmModel model : models) {
-            model.init();
+            model.init(childSeed);
         }
     }
 
@@ -37,7 +41,9 @@ public class CompareModel implements AlgorithmModel {
 
     @Override
     public void start() {
-        this.init();
+        Random random = new Random();
+        int childSeed = random.nextInt();
+        this.init(childSeed);
 
         for (int i = 0; i < this.compareModelNames.length; i++) {
             this.resultRecord.append(compareModelNames[i]);

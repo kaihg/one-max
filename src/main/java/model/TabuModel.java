@@ -28,8 +28,8 @@ public class TabuModel implements AlgorithmModel {
     }
 
     @Override
-    public void init() {
-        Random random = new Random();
+    public void init(int seed) {
+        Random random = new Random(seed);
 
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < bitCount; i++) {
@@ -52,7 +52,9 @@ public class TabuModel implements AlgorithmModel {
 
     @Override
     public void start() {
-        init();
+        Random random = new Random();
+        int childSeed = random.nextInt();
+        this.init(childSeed);
 
         for (int i = 0; i < maxIteration; i++) {
             iterateOnce();

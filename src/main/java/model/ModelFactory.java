@@ -8,12 +8,15 @@ import transition.LongTransition;
 import transition.TransitFactory;
 import transition.TransitType;
 import vo.Config;
+import vo.Product;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
 
 public class ModelFactory {
 
@@ -121,7 +124,23 @@ public class ModelFactory {
         System.out.println(path);
         ClassLoader classLoader = ModelFactory.class.getClassLoader();
         File file = new File(classLoader.getResource(path).getFile());
-        return new Gson().fromJson(new FileReader(file), Config.class);
+        Config config = new Gson().fromJson(new FileReader(file), Config.class);
+
+        // 有要使用隨機物件再打開
+//        setRandomProduct(config);
+        return config;
+    }
+
+    private static void setRandomProduct(Config config) {
+        Random random = new Random();
+        ArrayList<Product> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Product product = new Product(random.nextInt(10) + 1, random.nextInt(10000) + 1);
+            list.add(product);
+        }
+        Product[] array = new Product[100];
+        list.toArray(array);
+        config.items = array;
     }
 
     public static String getAlgorithmName(String shortCode) {

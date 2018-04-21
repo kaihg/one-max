@@ -27,8 +27,8 @@ public class HillClimbingModel implements AlgorithmModel{
     }
 
     @Override
-    public void init() {
-        Random random = new Random();
+    public void init(int seed) {
+        Random random = new Random(seed);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < bitCount; i++) {
             builder.append(random.nextInt(2));
@@ -51,7 +51,9 @@ public class HillClimbingModel implements AlgorithmModel{
 
     @Override
     public void start() {
-        init();
+        Random random = new Random();
+        int childSeed = random.nextInt();
+        this.init(childSeed);
 
         int maxScore = evaluateFunction.maxScore(this.tempAry);
 

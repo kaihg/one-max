@@ -5,7 +5,7 @@ import transition.LongTransition;
 
 public interface AlgorithmModel {
 
-    void init();
+    void init(int seed);
 
     void setTransit(LongTransition transit);
 
