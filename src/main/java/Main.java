@@ -1,4 +1,5 @@
 import model.AlgorithmModel;
+import model.CompareModel;
 import model.ModelFactory;
 
 import java.io.FileNotFoundException;
@@ -14,10 +15,16 @@ public class Main {
             algorithm = args[0];
         }
 
-        AlgorithmModel model;
         if (ModelFactory.TKP_COMPARE.equals(algorithm)) {
-            model = ModelFactory.createTKPCompareModels(args[1]);
+            CompareModel model = ModelFactory.createTKPCompareModels(args[1]);
+            if (args.length >= 3) {
+                model.setSeed(Integer.parseInt(args[2]));
+            }
+            System.out.println("Start TKP compare");
+            model.start();
+
         } else {
+            AlgorithmModel model;
             double[] extras = new double[args.length - 5];
             testN = Integer.parseInt(args[1]);
             runTimes = Integer.parseInt(args[2]);
@@ -28,11 +35,11 @@ public class Main {
                 extras[i] = Double.parseDouble(args[i + 5]);
             }
             model = ModelFactory.createModel(algorithm, testN, runTimes, iterationCount, neighborPIckCount, extras);
-
+            System.out.println("Start " + ModelFactory.getAlgorithmName(algorithm));
+            model.start();
+            System.out.println(String.format("The one-max result of 2^%d is %s, it's score is %d", testN, model.getResult(), model.getScore()));
         }
-
-        System.out.println("Start " + ModelFactory.getAlgorithmName(algorithm));
-        model.start();
-        System.out.println(String.format("The one-max result of 2^%d is %s, it's score is %d", testN, model.getResult(), model.getScore()));
     }
+
+
 }

@@ -12,6 +12,7 @@ public class CompareModel implements AlgorithmModel {
     private int iteration;
     private StringBuilder resultRecord;
     private String[] compareModelNames;
+    private int initSeed;
 
     public CompareModel(AlgorithmModel[] models, int iteration, String[] compareModelNames) {
         this.models = models;
@@ -39,11 +40,22 @@ public class CompareModel implements AlgorithmModel {
 
     }
 
+    public void setSeed(int seed) {
+        this.initSeed = seed;
+    }
+
     @Override
     public void start() {
-        Random random = new Random();
-        int childSeed = random.nextInt();
-        this.init(childSeed);
+        if (this.initSeed != 0) {
+            System.out.println("init seed : " + initSeed);
+            this.init(initSeed);
+        } else {
+            Random random = new Random();
+            int childSeed = random.nextInt();
+            System.out.println("init seed : " + childSeed);
+            this.init(childSeed);
+        }
+
 
         for (int i = 0; i < this.compareModelNames.length; i++) {
             this.resultRecord.append(compareModelNames[i]);

@@ -9,6 +9,7 @@ import transition.TransitFactory;
 import transition.TransitType;
 import vo.Config;
 import vo.Product;
+import vo.RangeSetting;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,7 +88,7 @@ public class ModelFactory {
         return model;
     }
 
-    public static AlgorithmModel createTKPCompareModels(String paramPath) throws FileNotFoundException {
+    public static CompareModel createTKPCompareModels(String paramPath) throws FileNotFoundException {
 
         Config config = parseJsonFile(paramPath);
 
@@ -113,7 +114,7 @@ public class ModelFactory {
             case SIMULATED_ANNEALING:
                 return createModel(algorithm, bitCount, config.runTimes, iteration, config.simulateAnnealingParam.neighbor, config.simulateAnnealingParam.temperature);
             case TABU_SEARCH:
-                return createModel(algorithm, bitCount, config.runTimes, iteration, config.hillClimbingParam.neighbor);
+                return createModel(algorithm, bitCount, config.runTimes, iteration, config.tabuSearchParam.neighbor);
             case GENETIC_ALGORITHM:
                 return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.geneticParam.population, config.geneticParam.crossoverRate, config.geneticParam.mutationRate);
         }
@@ -126,16 +127,25 @@ public class ModelFactory {
         File file = new File(classLoader.getResource(path).getFile());
         Config config = new Gson().fromJson(new FileReader(file), Config.class);
 
-        // 有要使用隨機物件再打開
-//        setRandomProduct(config);
+        if (config.useRandomItem) {
+            setRandomProduct(config);
+        }
         return config;
     }
 
     private static void setRandomProduct(Config config) {
         Random random = new Random();
         ArrayList<Product> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            Product product = new Product(random.nextInt(10) + 1, random.nextInt(10000) + 1);
+
+        RangeSetting setting = config.randomRange;
+        // 先不使用double，只用int就好
+        int minWeight = (int) setting.weight[0];
+        int maxWeight = (int) setting.weight[1] - minWeight + 1;
+        int minValue = (int) setting.value[0];
+        int maxValue = (int) setting.value[1] - minValue + 1;
+
+        for (int i = 0; i < setting.itemSize; i++) {
+            Product product = new Product(random.nextInt(maxWeight) + minWeight, random.nextInt(maxValue) + minValue);
             list.add(product);
         }
         Product[] array = new Product[100];

@@ -6,6 +6,8 @@ public class Config {
     public double maxWeight;
     public int iteration;
     public int runTimes;
+    public boolean useRandomItem;
+    public RangeSetting randomRange;
 
     public HillClimbingParam hillClimbingParam;
     public SimulateAnnealingParam simulateAnnealingParam;

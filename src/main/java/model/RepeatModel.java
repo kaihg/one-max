@@ -74,21 +74,21 @@ public class RepeatModel implements AlgorithmModel {
     @Override
     public int getScore() {
         // 找平均
-//        double score = 0d;
-//        if (models != null) {
-//            for (AlgorithmModel model : models) {
-//                score += model.getScore();
-//            }
-//        }
-//        return (int) Math.round(score / repeatTimes);
-
-        // 找最佳
-        double score = 0;
+        double score = 0d;
         if (models != null) {
             for (AlgorithmModel model : models) {
-                score = Math.max(score, model.getScore());
+                score += model.getScore();
             }
         }
-        return (int) score;
+        return (int) Math.round(score / repeatTimes);
+
+        // 找最佳
+//        double score = 0;
+//        if (models != null) {
+//            for (AlgorithmModel model : models) {
+//                score = Math.max(score, model.getScore());
+//            }
+//        }
+//        return (int) score;
     }
 }

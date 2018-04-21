@@ -6,30 +6,21 @@
     "ga"
   ],
   "items": [
-    {
-      "value": 4500,
-      "weight": 4
-    },
-    {
-      "value": 5700,
-      "weight": 5
-    },
-    {
-      "value": 2250,
-      "weight": 2
-    },
-    {
-      "value": 1100,
-      "weight": 1
-    },
-    {
-      "value": 6700,
-      "weight": 6
-    }
   ],
-  "useRandomItem": false,
-  "maxWeight": 8,
-  "iteration": 1000,
+  "useRandomItem": true,
+  "randomRange": {
+    "itemSize": 100,
+    "weight": [
+      1,
+      10
+    ],
+    "value": [
+      100,
+      500
+    ]
+  },
+  "maxWeight": 200,
+  "iteration": 5000,
   "runTimes": 30,
   "hillClimbingParam": {
     "neighbor": 10
