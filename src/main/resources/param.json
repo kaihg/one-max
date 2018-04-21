@@ -34,7 +34,8 @@
     "neighbor": 10
   },
   "simulateAnnealingParam": {
-    "temperature": 1
+    "neighbor": 1,
+    "temperature": 100
   },
   "tabuSearchParam": {
     "neighbor": 10

@@ -108,7 +108,7 @@ public class ModelFactory {
             case HILL_CLIMBING:
                 return createModel(algorithm, bitCount, config.runTimes, iteration, config.hillClimbingParam.neighbor);
             case SIMULATED_ANNEALING:
-                return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.simulateAnnealingParam.temperature);
+                return createModel(algorithm, bitCount, config.runTimes, iteration, config.simulateAnnealingParam.neighbor, config.simulateAnnealingParam.temperature);
             case TABU_SEARCH:
                 return createModel(algorithm, bitCount, config.runTimes, iteration, config.hillClimbingParam.neighbor);
             case GENETIC_ALGORITHM:
