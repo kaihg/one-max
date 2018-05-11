@@ -28,6 +28,7 @@ public class ModelFactory {
     public static final String GENETIC_ALGORITHM = "ga";
     public static final String GENETIC_ALGORITHM_TKP = "ga_tkp";
     public static final String TKP_COMPARE = "tkp";
+    public static final String PSO_ALGORITHM = "pso";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount, double... extraParams) {
         AlgorithmModel model = null;
@@ -117,6 +118,8 @@ public class ModelFactory {
                 return createModel(algorithm, bitCount, config.runTimes, iteration, config.tabuSearchParam.neighbor);
             case GENETIC_ALGORITHM:
                 return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.geneticParam.population, config.geneticParam.crossoverRate, config.geneticParam.mutationRate);
+            case PSO_ALGORITHM:
+
         }
         return null;
     }
@@ -169,9 +172,22 @@ public class ModelFactory {
                 return "Genetic Algorithm for TKP problem";
             case TKP_COMPARE:
                 return "TKP";
+            case PSO_ALGORITHM:
+                return "Particle Swarm Optimization";
             default:
                 return "Nothing";
         }
     }
 
+    public static AlgorithmModel createPSOModelFromFile(String path, String algoritmName) throws FileNotFoundException {
+
+        Config config = parseJsonFile(path);
+
+        EvaluateFunction function = EvaluatorFactory.createAckleyEvaluator();
+
+        AlgorithmModel model = createModel(algoritmName, config.psoAckleyParam.dimRange.length, config.iteration, config);
+        model.setEvaluator(function);
+
+        return null;
+    }
 }

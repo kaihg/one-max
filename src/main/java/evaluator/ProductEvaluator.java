@@ -13,7 +13,7 @@ public class ProductEvaluator implements EvaluateFunction<int[]> {
     }
 
     @Override
-    public int evaluate(int[] items) {
+    public double evaluate(int[] items) {
         double sumWeight = 0;
         double sumValue = 0;
 

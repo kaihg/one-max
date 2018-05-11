@@ -37,7 +37,7 @@ public class TabuModel implements AlgorithmModel {
         }
         transition.setDefaultValue(builder.toString());
         bestObj = Arrays.copyOf(transition.next(), bitCount);
-        score = evaluate.evaluate(bestObj);
+        score = (int) evaluate.evaluate(bestObj);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class TabuModel implements AlgorithmModel {
     public void iterateOnce() {
         transition.neighbor(bestObj, tempAry);
 
-        int score2 = evaluate.evaluate(tempAry);
+        int score2 = (int) evaluate.evaluate(tempAry);
 
         if (score2 > score) {
             System.arraycopy(tempAry, 0, bestObj, 0, bitCount);
@@ -88,7 +88,7 @@ public class TabuModel implements AlgorithmModel {
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 }

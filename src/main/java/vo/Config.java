@@ -13,5 +13,5 @@ public class Config {
     public SimulateAnnealingParam simulateAnnealingParam;
     public TabuSearchParam tabuSearchParam;
     public GeneticParam geneticParam;
-
+    public PsoParam psoAckleyParam;
 }

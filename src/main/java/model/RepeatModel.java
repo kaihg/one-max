@@ -72,7 +72,7 @@ public class RepeatModel implements AlgorithmModel {
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         // 找平均
         double score = 0d;
         if (models != null) {

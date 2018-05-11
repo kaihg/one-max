@@ -91,7 +91,7 @@ public class GeneticModel implements AlgorithmModel {
 
     private int[] fitnessFunction(int[][] population) {
         for (int i = 0; i < population.length; i++) {
-            scoreMap[i] = evaluator.evaluate(population[i]);
+            scoreMap[i] = (int) evaluator.evaluate(population[i]);
         }
         return scoreMap;
     }
@@ -172,7 +172,7 @@ public class GeneticModel implements AlgorithmModel {
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         int[] sourceMap = fitnessFunction(current);
         int best = 0;
         for (int i = 1; i < sourceMap.length; i++) {
@@ -182,6 +182,6 @@ public class GeneticModel implements AlgorithmModel {
         }
 
         int[] bestObj = current[best];
-        return evaluator.evaluate(bestObj);
+        return (int) evaluator.evaluate(bestObj);
     }
 }

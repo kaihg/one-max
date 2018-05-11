@@ -19,6 +19,10 @@ public class EvaluatorFactory {
         return new ProductEvaluator(maxWeight, params);
     }
 
+    public static EvaluateFunction createAckleyEvaluator() {
+        return new AckleyEvaluator();
+    }
+
     private static Product[] createProducts(double... weight_values) {
         int length = weight_values.length / 2;
         Product[] items = new Product[length];

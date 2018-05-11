@@ -3,7 +3,7 @@ package evaluator;
 class ManualBitCountEvaluator implements EvaluateFunction<Long> {
 
     @Override
-    public int evaluate(Long value) {
+    public double evaluate(Long value) {
         return evaluate(value.longValue());
     }
 

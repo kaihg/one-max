@@ -98,7 +98,7 @@ public class CompareModel implements AlgorithmModel {
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         return 0;
     }
 }

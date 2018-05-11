@@ -36,7 +36,7 @@ public class HillClimbingModel implements AlgorithmModel{
         transition.setDefaultValue(builder.toString());
 
         current = transition.next();
-        score = evaluateFunction.evaluate(current);
+        score = (int) evaluateFunction.evaluate(current);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class HillClimbingModel implements AlgorithmModel{
         // find better neighbor with "bitCount" times at most
         transition.neighbor(current, tempAry);
 
-        int score2 = evaluateFunction.evaluate(tempAry);
+        int score2 = (int) evaluateFunction.evaluate(tempAry);
         if (score2 > score) {
             System.arraycopy(tempAry, 0, bestObj, 0, bitCount);
             System.arraycopy(tempAry, 0, current, 0, bitCount);
@@ -90,7 +90,7 @@ public class HillClimbingModel implements AlgorithmModel{
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 }

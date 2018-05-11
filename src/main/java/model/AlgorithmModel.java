@@ -23,6 +23,6 @@ public interface AlgorithmModel {
 
     String getResult();
 
-    int getScore();
+    double getScore();
 
 }

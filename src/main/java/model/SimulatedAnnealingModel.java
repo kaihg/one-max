@@ -44,7 +44,7 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
         transition.setDefaultValue(builder.toString());
 
         current = transition.next();
-        score = evaluateFunction.evaluate(current);
+        score = (int) evaluateFunction.evaluate(current);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
     @Override
     public void iterateOnce() {
         transition.neighbor(current, tempAry);
-        int score2 = evaluateFunction.evaluate(tempAry);
+        int score2 = (int) evaluateFunction.evaluate(tempAry);
 
         if (determination(score, score2)) {
             System.arraycopy(tempAry, 0, bestObj, 0, bitCount);
@@ -108,7 +108,7 @@ public class SimulatedAnnealingModel implements AlgorithmModel {
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         return score;
     }
 }

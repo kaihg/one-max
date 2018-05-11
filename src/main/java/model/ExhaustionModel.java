@@ -34,7 +34,7 @@ public class ExhaustionModel implements AlgorithmModel {
 
         while(transit.hasNext()){
             int[] nextObj = transit.next();
-            int score = evalutor.evaluate(nextObj);
+            int score = (int) evalutor.evaluate(nextObj);
             if (score > this.bestScore){
                 this.bestObj = Arrays.copyOf(nextObj, nextObj.length);
                 this.bestScore = score;
@@ -58,7 +58,7 @@ public class ExhaustionModel implements AlgorithmModel {
     }
 
     @Override
-    public int getScore() {
+    public double getScore() {
         return bestScore;
     }
 }
