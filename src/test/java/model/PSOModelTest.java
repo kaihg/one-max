@@ -24,11 +24,6 @@ public class PSOModelTest {
             model.start();
             double score = model.getScore();
             avgScore += score;
-
-            if (score > 0.001) {
-                System.out.println("score");
-            }
-            Assert.assertEquals(score, 0, 0.00001);
         }
         avgScore = avgScore / count;
 
