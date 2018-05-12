@@ -3,6 +3,7 @@ import model.CompareModel;
 import model.ModelFactory;
 
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -27,11 +28,23 @@ public class Main {
 
     private static void startPSO(String[] args) throws FileNotFoundException {
         AlgorithmModel model = ModelFactory.createPSOModelFromFile(args[1], args[0]);
-//        if (args.length >= 3) {
-//            model.setSeed(Integer.parseInt(args[2]));
-//        }
         System.out.println("Start " + ModelFactory.getAlgorithmName(args[0]) + " Iteration :");
-        model.start();
+
+        int seed = new Random().nextInt();
+        System.out.println("seed : " + seed);
+        model.init(seed);
+
+        for (int i = 0; i < 1000; i++) {
+            model.iterateOnce();
+            if (i % 100 == 0) {
+                System.out.println("iteration : " + i + ", cur best is " + model.getResult());
+            }
+
+        }
+
+//        model.start();
+
+        System.out.println("The result is " + model.getResult() + ", and the score is " + model.getScore());
     }
 
     private static void otherAlgorithm(String[] args) {

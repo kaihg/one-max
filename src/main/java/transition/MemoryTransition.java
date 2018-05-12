@@ -24,6 +24,11 @@ public class MemoryTransition implements LongTransition<int[]> {
     }
 
     @Override
+    public void update(int[] obj) {
+
+    }
+
+    @Override
     public void setDefaultValue(String value) {
         int length = value.length();
         for (int i = 0; i < currentAry.length; i++) {

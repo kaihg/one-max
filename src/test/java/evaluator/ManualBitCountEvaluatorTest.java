@@ -15,14 +15,14 @@ public class ManualBitCountEvaluatorTest {
 
     @Test
     public void testComputerScore() throws Exception {
-        Assert.assertEquals(0, evaluator.evaluate(0b0000L));
-        Assert.assertEquals(1, evaluator.evaluate(0b0001L));
-        Assert.assertEquals(1, evaluator.evaluate(0b0010L));
-        Assert.assertEquals(2, evaluator.evaluate(0b0011L));
-        Assert.assertEquals(3, evaluator.evaluate(0b0111L));
-        Assert.assertEquals(2, evaluator.evaluate(0b1001L));
+        Assert.assertEquals(0, evaluator.evaluate(0b0000L), 0);
+        Assert.assertEquals(1, evaluator.evaluate(0b0001L), 0);
+        Assert.assertEquals(1, evaluator.evaluate(0b0010L), 0);
+        Assert.assertEquals(2, evaluator.evaluate(0b0011L), 0);
+        Assert.assertEquals(3, evaluator.evaluate(0b0111L), 0);
+        Assert.assertEquals(2, evaluator.evaluate(0b1001L), 0);
 
-        Assert.assertEquals(1, evaluator.evaluate(0b100L));
+        Assert.assertEquals(1, evaluator.evaluate(0b100L), 0);
 
     }
 

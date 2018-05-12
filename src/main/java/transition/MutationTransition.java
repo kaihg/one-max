@@ -11,6 +11,11 @@ public class MutationTransition implements LongTransition<int[][]> {
     }
 
     @Override
+    public void update(int[][] obj) {
+
+    }
+
+    @Override
     public void setDefaultValue(String value) {
 
     }

@@ -19,12 +19,12 @@ public class BestNeigTranstitionTest {
         int[] temp = new int[100];
 
         transition.neighbor(current, temp);
-        Assert.assertEquals(1, function.evaluate(temp) - function.evaluate(current));
+        Assert.assertEquals(1, function.evaluate(temp) - function.evaluate(current), 0);
 
         current = Arrays.copyOf(temp, 100);
         transition.neighbor(current, temp);
-        Assert.assertEquals(1, function.evaluate(temp) - function.evaluate(current));
+        Assert.assertEquals(1, function.evaluate(temp) - function.evaluate(current), 0);
 
-        Assert.assertEquals(2, function.evaluate(temp) - function.evaluate(start));
+        Assert.assertEquals(2, function.evaluate(temp) - function.evaluate(start), 0);
     }
 }

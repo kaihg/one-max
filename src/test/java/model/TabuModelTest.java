@@ -11,7 +11,7 @@ public class TabuModelTest {
 
         model.start();
 
-        Assert.assertEquals(8, model.getScore());
+        Assert.assertEquals(8, model.getScore(), 0);
         Assert.assertEquals("11111111", model.getResult());
     }
 
@@ -21,7 +21,7 @@ public class TabuModelTest {
 
         model.start();
 
-        Assert.assertEquals(10, model.getScore());
+        Assert.assertEquals(10, model.getScore(), 0);
     }
 
     @Test
@@ -30,6 +30,6 @@ public class TabuModelTest {
 
         model.start();
 
-        Assert.assertEquals(100, model.getScore());
+        Assert.assertEquals(100, model.getScore(), 0);
     }
 }

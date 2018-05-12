@@ -2,8 +2,6 @@ package evaluator;
 
 public class AckleyEvaluator implements EvaluateFunction<double[]> {
 
-    // TODO: the offset of Ackley
-
     private static final double PARAM_A = 20;
     private static final double PARAM_B = 0.2;
     private static final double PARAM_C = 2 * Math.PI;
@@ -15,7 +13,7 @@ public class AckleyEvaluator implements EvaluateFunction<double[]> {
 
         for (double dim : item) {
             square += dim * dim;
-            cosSum += PARAM_C * dim;
+            cosSum += Math.cos(PARAM_C * dim);
         }
 
         int length = item.length;

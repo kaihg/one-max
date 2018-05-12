@@ -26,7 +26,7 @@ public class GeneticModelTest {
     private void simpleTestResult(int bit, int iterationCount, int populationSize, double rate1, double rate2) {
         AlgorithmModel model = ModelFactory.createModel(ModelFactory.GENETIC_ALGORITHM, bit, 1, iterationCount, 1, populationSize, rate1, rate2);
         model.start();
-        Assert.assertEquals(bit, model.getScore());
+        Assert.assertEquals(bit, model.getScore(), 0);
 
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < bit; i++) {

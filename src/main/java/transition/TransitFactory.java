@@ -1,5 +1,7 @@
 package transition;
 
+import vo.Config;
+
 import java.util.Optional;
 
 public class TransitFactory {
@@ -19,6 +21,10 @@ public class TransitFactory {
 
     public static LongTransition<int[][]> createGeneticTransition(double crossoverRate, double mutationRate) {
         return new GeneticTransition(crossoverRate, mutationRate);
+    }
+
+    public static SwarmTransition createSwarmTransition(Config config) {
+        return new SwarmTransition(config.psoAckleyParam);
     }
 
 }

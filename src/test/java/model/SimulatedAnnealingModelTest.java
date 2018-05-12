@@ -11,7 +11,7 @@ public class SimulatedAnnealingModelTest {
 
         model.start();
 
-        Assert.assertEquals(8, model.getScore());
+        Assert.assertEquals(8, model.getScore(), 0);
         Assert.assertEquals("11111111", model.getResult());
     }
 
@@ -21,7 +21,7 @@ public class SimulatedAnnealingModelTest {
 
         model.start();
 
-        Assert.assertEquals(20, model.getScore());
+        Assert.assertEquals(20, model.getScore(), 0);
         Assert.assertEquals("11111111111111111111", model.getResult());
     }
 
@@ -40,7 +40,7 @@ public class SimulatedAnnealingModelTest {
     private void simpleTestResult(int bit) {
         AlgorithmModel model = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, bit, 1, 1000, 1);
         model.start();
-        Assert.assertEquals(bit, model.getScore());
+        Assert.assertEquals(bit, model.getScore(), 0);
 
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < bit; i++) {

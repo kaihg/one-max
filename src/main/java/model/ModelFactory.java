@@ -119,7 +119,7 @@ public class ModelFactory {
             case GENETIC_ALGORITHM:
                 return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.geneticParam.population, config.geneticParam.crossoverRate, config.geneticParam.mutationRate);
             case PSO_ALGORITHM:
-
+                return new PSOModel(iteration, config.psoAckleyParam);
         }
         return null;
     }
@@ -184,10 +184,12 @@ public class ModelFactory {
         Config config = parseJsonFile(path);
 
         EvaluateFunction function = EvaluatorFactory.createAckleyEvaluator();
+        LongTransition transition = TransitFactory.createSwarmTransition(config);
 
         AlgorithmModel model = createModel(algoritmName, config.psoAckleyParam.dimRange.length, config.iteration, config);
         model.setEvaluator(function);
+        model.setTransit(transition);
 
-        return null;
+        return model;
     }
 }

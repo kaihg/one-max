@@ -23,6 +23,11 @@ public class IncreaseTransition implements LongTransition<int[]> {
 
 
     @Override
+    public void update(int[] obj) {
+
+    }
+
+    @Override
     public void setDefaultValue(String value) {
         long longValue = Long.parseLong(value);
         LongTransition.convertLongToIntAry(bitCount, longValue, currentAry);

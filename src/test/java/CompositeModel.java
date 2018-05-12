@@ -46,11 +46,11 @@ public class CompositeModel {
         AlgorithmModel modelHC = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bitCount, repeatTimes, iteration, neighborPick);
         AlgorithmModel modelGA = ModelFactory.createModel(ModelFactory.GENETIC_ALGORITHM, bitCount, repeatTimes, iteration, 1, 8d, 0.6, 0.1);
 
-        modelHC.init();
-        modelGA.init();
+        modelHC.init(0);
+        modelGA.init(0);
         for (int i = 0; i <= iteration; i++) {
 
-            System.out.println(String.format("%d,%d,%d", i, modelHC.getScore(), modelGA.getScore()));
+            System.out.println(String.format("%d,%f,%f", i, modelHC.getScore(), modelGA.getScore()));
 
             modelHC.iterateOnce();
             modelGA.iterateOnce();
@@ -64,11 +64,11 @@ public class CompositeModel {
         AlgorithmModel modelHC = ModelFactory.createModel(ModelFactory.HILL_CLIMBING, bitCount, repeatTimes, iteration, neighborPick);
         AlgorithmModel modelSA = ModelFactory.createModel(ModelFactory.SIMULATED_ANNEALING, bitCount, repeatTimes, iteration, neighborPick, 1d, 0.99);
 
-        modelHC.init();
-        modelSA.init();
+        modelHC.init(0);
+        modelSA.init(0);
         for (int i = 0; i <= iteration; i++) {
 
-            System.out.println(String.format("%d,%d,%d", i, modelHC.getScore(), modelSA.getScore()));
+            System.out.println(String.format("%d,%f,%f", i, modelHC.getScore(), modelSA.getScore()));
 
             modelHC.iterateOnce();
             modelSA.iterateOnce();

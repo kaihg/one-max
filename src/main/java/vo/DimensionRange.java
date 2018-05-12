@@ -1,6 +1,6 @@
 package vo;
 
-public class DimsionRange {
+public class DimensionRange {
 
     public double max;
     public double min;

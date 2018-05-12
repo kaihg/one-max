@@ -17,6 +17,11 @@ public class BestNeighborTransition implements LongTransition<int[]> {
     }
 
     @Override
+    public void update(int[] obj) {
+
+    }
+
+    @Override
     public void setDefaultValue(String value) {
         this.transition.setDefaultValue(value);
     }

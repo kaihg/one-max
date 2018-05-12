@@ -3,7 +3,9 @@ package vo;
 public class Swarm {
 
     public double[] inertia;
+    public double localScore;
     public double[] localBest;
+    public double[] globalBest;
     public double[] position;
 
     public Swarm(int dimension) {

@@ -2,6 +2,8 @@ package transition;
 
 public interface LongTransition<T> {
 
+    void update(T obj);
+
     void setDefaultValue(String value);
 
     boolean hasNext();
