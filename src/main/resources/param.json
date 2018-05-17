@@ -50,16 +50,16 @@
     "inertiaWeight": 0.5,
     "localWeight": 0.5,
     "globalWeight": 0.5,
-    "maxSpeed": 1,
+    "maxSpeed": 30,
     "swarmSize": 50,
     "dimRange": [
       {
-        "max": 10,
-        "min": -10
+        "max": 30,
+        "min": -30
       },
       {
-        "max": 10,
-        "min": -10
+        "max": 30,
+        "min": -30
       }
     ]
   }

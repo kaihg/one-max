@@ -32,8 +32,9 @@ public class PSOModel implements AlgorithmModel {
         this.dimRanges = param.dimRange;
         this.maxSpeed = param.maxSpeed;
 
+        int dimensions = param.dimRange.length;
         globalBest = new double[param.dimRange.length];
-        swarms = initSwarms(swarmSize, param);
+        swarms = initSwarms(dimensions, param);
     }
 
     private Swarm[] initSwarms(int dimensions, PsoParam param) {
