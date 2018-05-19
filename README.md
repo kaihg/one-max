@@ -82,3 +82,8 @@ The best one is Genetic, and others is sa, tabu, hc.
 1. Add CompareModel to compare algorithms
 2. It is only for TKP now.
 3. Add Factory function to read setting from json file
+
+### Genetic K-means Algorithm (2018/5/20)
+1. Add a class extend Genetic, but find clusters
+2. Start with 'ga_kmean param.json' will start it with parameter from file.
+3. Support less clusters setting (K) if it is better than default.
