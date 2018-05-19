@@ -27,6 +27,6 @@ public class PSOModelTest {
         }
         avgScore = avgScore / count;
 
-        Assert.assertEquals(avgScore, 0, 0.00001);
+        Assert.assertEquals(0, avgScore, 0.00001);
     }
 }
