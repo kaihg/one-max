@@ -9,17 +9,18 @@ public class GeneticModel implements AlgorithmModel {
 
 
     private final int iteration;
-    private LongTransition<int[][]> transition;
-    private EvaluateFunction<int[]> evaluator;
+    LongTransition<int[][]> transition;
+    EvaluateFunction evaluator;
 
-    private int[][] current;
+    protected int[][] current;
     private int[][] fitPopulation;
     private int[][] temp;
-    private int[] scoreMap;
+    private double[] scoreMap;
     private int[] cdf;
     private int bitCount;
+    protected int tourmentRepeatTimes = 1;
 
-    private Random random;
+    protected Random random;
 
     public GeneticModel(int iteration, int populationSize, int bitCount) {
         this.iteration = iteration;
@@ -27,7 +28,7 @@ public class GeneticModel implements AlgorithmModel {
         this.current = new int[populationSize][bitCount];
         this.fitPopulation = new int[populationSize][bitCount];
         this.temp = new int[populationSize][bitCount];
-        this.scoreMap = new int[populationSize];
+        this.scoreMap = new double[populationSize];
         this.cdf = new int[populationSize];
 
 
@@ -62,18 +63,15 @@ public class GeneticModel implements AlgorithmModel {
         int childSeed = random.nextInt();
         this.init(childSeed);
 
-//        int best = evaluator.maxScore(current[0]);
         for (int i = 0; i < iteration; i++) {
             iterateOnce();
-
-
         }
 
     }
 
     @Override
     public void iterateOnce() {
-        int[] fitnessScores = fitnessFunction(current);
+        double[] fitnessScores = fitnessFunction(current);
         int[][] selected = select(current, fitnessScores);
 
         transition.neighbor(selected, temp);
@@ -81,25 +79,28 @@ public class GeneticModel implements AlgorithmModel {
         changeCurrentPopulation(temp, current);
     }
 
-    private void changeCurrentPopulation(int[][] temp, int[][] current) {
+    protected void changeCurrentPopulation(int[][] temp, int[][] current) {
         for (int i = 0; i < temp.length; i++) {
             System.arraycopy(temp[i], 0, current[i], 0, temp[i].length);
         }
-
     }
 
 
-    private int[] fitnessFunction(int[][] population) {
+    private double[] fitnessFunction(int[][] population) {
         for (int i = 0; i < population.length; i++) {
-            scoreMap[i] = (int) evaluator.evaluate(population[i]);
+            scoreMap[i] = calculateFitnessScore(population[i], i);
         }
         return scoreMap;
     }
 
-    private int[][] select(int[][] population, int[] fitnessScores) {
+    protected double calculateFitnessScore(int[] gene, int index) {
+        return evaluator.evaluate(gene);
+    }
+
+    private int[][] select(int[][] population, double[] fitnessScores) {
         // roulette or tournament
 
-        return tournamentSelection(population, 1, fitnessScores);
+        return tournamentSelection(population, tourmentRepeatTimes, fitnessScores);
 
     }
 
@@ -132,16 +133,14 @@ public class GeneticModel implements AlgorithmModel {
         return population[0];
     }
 
-    private int[][] tournamentSelection(int[][] population, int repeat, int[] scoreMap) {
+    private int[][] tournamentSelection(int[][] population, int repeat, double[] scoreMap) {
 
         for (int i = 0; i < fitPopulation.length; i++) {
             int winner = random.nextInt(population.length);
 
             for (int j = 0; j < repeat; j++) {
                 int competitor = random.nextInt(population.length);
-                if (scoreMap[competitor] > scoreMap[winner]) {
-                    winner = competitor;
-                }
+                winner = judgmentWinner(scoreMap, competitor, winner);
             }
 
             fitPopulation[i] = population[winner];
@@ -150,14 +149,16 @@ public class GeneticModel implements AlgorithmModel {
         return fitPopulation;
     }
 
+    protected int judgmentWinner(double[] scoreMap, int competitor, int winner) {
+        return scoreMap[competitor] > scoreMap[winner] ? competitor : winner;
+    }
+
     @Override
     public String getResult() {
-        int[] sourceMap = fitnessFunction(current);
+        double[] sourceMap = fitnessFunction(current);
         int best = 0;
         for (int i = 1; i < sourceMap.length; i++) {
-            if (sourceMap[i] > sourceMap[best]) {
-                best = i;
-            }
+            best = judgmentWinner(sourceMap, i, best);
         }
 
         int[] bestObj = current[best];
@@ -173,7 +174,7 @@ public class GeneticModel implements AlgorithmModel {
 
     @Override
     public double getScore() {
-        int[] sourceMap = fitnessFunction(current);
+        double[] sourceMap = fitnessFunction(current);
         int best = 0;
         for (int i = 1; i < sourceMap.length; i++) {
             if (sourceMap[i] > sourceMap[best]) {

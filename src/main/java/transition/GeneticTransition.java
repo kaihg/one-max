@@ -12,6 +12,11 @@ public class GeneticTransition implements LongTransition<int[][]> {
         this.mutation = new MutationTransition(mutationRate);
     }
 
+    GeneticTransition(double crossoverRate, double mutationRate, int maxRange) {
+        this.crossover = new CrossoverTransition(crossoverRate);
+        this.mutation = new MutationTransition(mutationRate, maxRange);
+    }
+
     @Override
     public void update(int[][] obj) {
 

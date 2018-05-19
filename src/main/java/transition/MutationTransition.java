@@ -5,9 +5,15 @@ import java.util.Random;
 public class MutationTransition implements LongTransition<int[][]> {
 
     private double rate;
+    private int maxRange;
 
     public MutationTransition(double rate) {
+        this(rate, 1);
+    }
+
+    public MutationTransition(double rate, int maxRange) {
         this.rate = rate;
+        this.maxRange = maxRange;
     }
 
     @Override
@@ -36,7 +42,13 @@ public class MutationTransition implements LongTransition<int[][]> {
 
             if (random.nextDouble() < rate) {
                 int index = random.nextInt(length);
-                child[index] ^= 1;
+                int curValue = child[index];
+                int value;
+                do {
+                    value = random.nextInt(maxRange + 1);
+                } while (value == curValue);
+                child[index] = value;
+//                child[index] ^= 1;
             }
         }
     }
