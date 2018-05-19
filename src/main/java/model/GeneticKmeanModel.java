@@ -68,9 +68,14 @@ public class GeneticKmeanModel extends GeneticModel {
         }
     }
 
-//
-//    @Override
-//    public String getResult() {
-//        return null;
-//    }
+    @Override
+    public double getScore() {
+
+        double score = Double.MAX_VALUE;
+        for (KMeanModel kMeanModel : clusters) {
+            score = Math.min(score, evaluator.evaluate(kMeanModel));
+        }
+
+        return score;
+    }
 }

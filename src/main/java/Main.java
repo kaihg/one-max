@@ -19,11 +19,23 @@ public class Main {
             case ModelFactory.PSO_ALGORITHM:
                 startPSO(args);
                 break;
+            case ModelFactory.GENETIC_ALGORITHM_KMEAN:
+                startFromFile(args);
+                break;
             default:
                 otherAlgorithm(args);
                 break;
         }
 
+    }
+
+    private static void startFromFile(String[] args) throws FileNotFoundException {
+        String algorithm = args[0];
+        AlgorithmModel model = ModelFactory.createModel(algorithm, args[1]);
+
+        System.out.println("Start " + ModelFactory.getAlgorithmName(algorithm));
+        model.start();
+        System.out.println("The result is " + model.getResult() + ", which score is " + model.getScore());
     }
 
     private static void startPSO(String[] args) throws FileNotFoundException {

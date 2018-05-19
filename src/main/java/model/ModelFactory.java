@@ -1,6 +1,7 @@
 package model;
 
 import com.google.gson.Gson;
+import evaluator.EuclideanEvaluator;
 import evaluator.EvaluateFunction;
 import evaluator.EvaluatorFactory;
 import transition.BestNeighborTransition;
@@ -29,6 +30,7 @@ public class ModelFactory {
     public static final String GENETIC_ALGORITHM_TKP = "ga_tkp";
     public static final String TKP_COMPARE = "tkp";
     public static final String PSO_ALGORITHM = "pso";
+    public static final String GENETIC_ALGORITHM_KMEAN = "ga_kmean";
 
     public static AlgorithmModel createModel(String algorithm, int bitCount, int runTimes, int iterationCount, int neighborPickCount, double... extraParams) {
         AlgorithmModel model = null;
@@ -67,6 +69,7 @@ public class ModelFactory {
                 transition = TransitFactory.createGeneticTransition(extraParams[1], extraParams[2]);
                 function = EvaluatorFactory.createTKPEvaluator(Arrays.copyOfRange(extraParams, 3, extraParams.length));
                 break;
+
         }
 
         if (neighborPickCount > 1) {
@@ -108,6 +111,12 @@ public class ModelFactory {
         return compareModel;
     }
 
+    public static AlgorithmModel createModel(String algorithm, String paramPath) throws FileNotFoundException {
+        Config config = parseJsonFile(paramPath);
+        AlgorithmModel model = createModel(algorithm, config.items.length, config.iteration, config);
+        return model;
+    }
+
     private static AlgorithmModel createModel(String algorithm, int bitCount, int iteration, Config config) {
         switch (algorithm) {
             case HILL_CLIMBING:
@@ -120,8 +129,22 @@ public class ModelFactory {
                 return createModel(algorithm, bitCount, config.runTimes, iteration, 1, config.geneticParam.population, config.geneticParam.crossoverRate, config.geneticParam.mutationRate);
             case PSO_ALGORITHM:
                 return new PSOModel(iteration, config.psoAckleyParam);
+            case GENETIC_ALGORITHM_KMEAN:
+                return createGeneticKmeanModel(iteration, config.runTimes, config);
         }
         return null;
+    }
+
+    private static AlgorithmModel createGeneticKmeanModel(int iteration, int runTimes, Config config) {
+        AlgorithmModel model = new GeneticKmeanModel(iteration, config.geneticParam.population, config.k_meanParam.data, config.k_meanParam.group_k);
+
+        LongTransition transition = TransitFactory.createGeneticTransition(config.geneticParam.crossoverRate, config.geneticParam.mutationRate);
+        EvaluateFunction function = new EuclideanEvaluator();
+
+        model.setTransit(transition);
+        model.setEvaluator(function);
+
+        return model;
     }
 
     private static Config parseJsonFile(String path) throws FileNotFoundException {
@@ -170,6 +193,8 @@ public class ModelFactory {
                 return "Genetic Algorithm";
             case GENETIC_ALGORITHM_TKP:
                 return "Genetic Algorithm for TKP problem";
+            case GENETIC_ALGORITHM_KMEAN:
+                return "Genetic Algorithm for K-Means";
             case TKP_COMPARE:
                 return "TKP";
             case PSO_ALGORITHM:

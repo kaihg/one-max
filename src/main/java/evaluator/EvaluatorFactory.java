@@ -23,6 +23,10 @@ public class EvaluatorFactory {
         return new AckleyEvaluator();
     }
 
+    public static EvaluateFunction createEulcideanEvaluator() {
+        return new EuclideanEvaluator();
+    }
+
     private static Product[] createProducts(double... weight_values) {
         int length = weight_values.length / 2;
         Product[] items = new Product[length];

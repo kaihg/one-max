@@ -14,4 +14,5 @@ public class Config {
     public TabuSearchParam tabuSearchParam;
     public GeneticParam geneticParam;
     public PsoParam psoAckleyParam;
+    public KmeanParam k_meanParam;
 }

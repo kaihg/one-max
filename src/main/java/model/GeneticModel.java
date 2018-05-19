@@ -183,6 +183,6 @@ public class GeneticModel implements AlgorithmModel {
         }
 
         int[] bestObj = current[best];
-        return (int) evaluator.evaluate(bestObj);
+        return evaluator.evaluate(bestObj);
     }
 }

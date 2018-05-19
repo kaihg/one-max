@@ -46,6 +46,35 @@
     "crossoverRate": 0.6,
     "mutationRate": 0.1
   },
+  "k_meanParam": {
+    "group_k": 3,
+    "data": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        -3,
+        -2
+      ],
+      [
+        -4,
+        -5
+      ]
+    ]
+  },
   "psoAckleyParam": {
     "inertiaWeight": 0.5,
     "localWeight": 0.5,
